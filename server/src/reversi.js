@@ -3,9 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
 
+import gameService from './services/gameservice/index.js';
 import createWebSocket from './api/websocket/index.js';
 import { clients } from './api/websocket/clients.js';
-// import { messageHandler } from './api/websocket/messagehandler';
+import messageHandler from './api/websocket/messagehandler.js';
 
 import { PORT } from './config/index.js';
 import API from './api/index.js';
@@ -19,9 +20,9 @@ app.use(express.json());
 
 // set client ping/pong function 
 //    (not necessary unless we're running on Heroku or something...)
-// messageHandler.addListener('__ping__', ({ clientId, data }) => {
-//    clients[clientId].send('__pong__', {message: '__pong__'});
-// });
+messageHandler.addListener('__ping__', ({ clientId, data }) => {
+   clients[clientId].send('__pong__', {message: '__pong__'});
+});
 
 // ----- log ----- //
 const requestLogger = (request, response, next) => {

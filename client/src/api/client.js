@@ -30,10 +30,11 @@ class Client {
       this.socket.onopen = () => console.log('client connected to server');
       this.socket.onmessage = message => {
          const parsedMessage = JSON.parse(message.data);
+         console.log('message from server:', parsedMessage);
          this.serverMessageHandler(parsedMessage);
       }
    }
-
+   
    // send a message to server
    send(type, data) {
       const message = {

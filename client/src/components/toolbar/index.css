@@ -13,6 +13,17 @@
 }
 
 
+/* ----- username / info area ----- */
+.toolbarArea .infoContainer { height: 200px; }
+
+.toolbarArea form>input { color: var(--ncsu-dark-gray); }
+.toolbarArea form>input:not(.active) { color: #999; }
+.toolbarArea form>button {
+   color: var(--ncsu-dark-gray);
+   margin-left: 5px;
+}
+
+
 
 .gameHistory {
    display: grid;

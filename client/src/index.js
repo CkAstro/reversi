@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './components/header';
 import Display from './components/display';
 import Toolbar from './components/toolbar';
-// import { RenderablesProvider } from './contexts/renderables';
+import client from './api/client';
+import { GameInfoProvider } from './contexts/gameinfo';
 import './index.css';
 
 const Reversi = () => {
+   useEffect(() => {
+      if (!client.isInit) client.init();
+   }, []);
+   
    return (
       <div className='datavisContainer'>
-         {/* <RenderablesProvider> */}
+         <GameInfoProvider>
             <Display/>
             <Toolbar/>
-         {/* </RenderablesProvider> */}
+         </GameInfoProvider>
       </div>
    );
 }
