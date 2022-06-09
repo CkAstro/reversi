@@ -19,10 +19,10 @@ const GameHistory = ({ recentGames, playerGames }) => {
    }
 
    const buttons = (
-      <div className='gameSelectContainer'>
-         <div className={`gameSelectButton noselect ${gameView === 'recent' ? 'active' : ''}`} 
+      <div className='historySelectContainer'>
+         <div className={`historySelectButton noselect ${gameView === 'recent' ? 'active' : ''}`} 
             onClick={() => setGameView('recent')}>Recent Games</div>
-         <div className={`gameSelectButton noselect ${gameView === 'player' ? 'active' : ''}`} 
+         <div className={`historySelectButton noselect ${gameView === 'player' ? 'active' : ''}`} 
             onClick={() => setGameView('player')}>Player History</div>
       </div>
    );
