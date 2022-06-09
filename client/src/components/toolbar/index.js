@@ -10,12 +10,11 @@ const Toolbar = () => {
    const [ recentGames, setRecentGames ] = useState([]);
    const [ playerGames, setPlayerGames ] = useState([]);
 
-
-   const { setPlayerId } = useGameInfo();
+   const { handleInfoUpdate } = useGameInfo();
 
    // listen for player id and update player game list
    client.addListener('playerIdUpdate', data => {
-      setPlayerId(data.playerId);
+      handleInfoUpdate(data);
       API.getPlayerGames(data.playerId).then(games => setPlayerGames(games.reverse()));
    });
 

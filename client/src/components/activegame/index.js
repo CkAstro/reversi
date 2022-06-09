@@ -1,14 +1,18 @@
 import { useGameInfo } from '../../contexts/gameinfo';
+import client from '../../api/client';
 import GameBoard from '../gameboard';
 import './index.css';
 
 const ActiveGame = () => {
-   const { gameInfo } = useGameInfo();
+   const { gameInfo, handleInfoUpdate } = useGameInfo();
 
-   const myTurn = gameInfo.color === gameInfo.activePlayer;
+   // listen for game update (player makes a move, etc)
+   client.addListener('gameUpdate', handleInfoUpdate);
+
+   const myTurn = gameInfo.playerColor === gameInfo.activePlayer;
    const moveText = gameInfo.opponent ? 
-      (myTurn ? `Your move (${gameInfo.color})` : `Opponent's move (${gameInfo.activePlayer})`) :
-      `You are ${gameInfo.color}. Waiting on other player...`;
+      (myTurn ? `Your move (${gameInfo.playerColor})` : `Opponent's move (${gameInfo.activePlayer})`) :
+      `You are ${gameInfo.playerColor}. Waiting on other player...`;
 
    const skip = myTurn && gameInfo.legalMove === false && !gameInfo.gameOver;
 
