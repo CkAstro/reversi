@@ -1,0 +1,45 @@
+
+.gameBoard {
+   display: grid;
+   grid-template-columns: repeat(8, 1fr);
+   grid-gap: -1px;
+   width: 328px;
+   height: 328px;
+}
+
+.gameSquare {
+   background: green;
+   width: 40px;
+   height: 40px;
+   border: 1px solid black;
+   margin-left: -1px;
+   margin-bottom: -1px;
+}
+
+.gamePiece {
+   width: 30px;
+   height: 30px;
+   border-radius: 50%;
+   margin: 5px;
+}
+
+.gamePiece.black { background: black; }
+.gamePiece.white { background: white; }
+
+.gameBoardContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 10px;
+}
+
+/* ----- mini pieces ----- */
+:not(.gameArea) .gameBoardContainer { padding: 0px; }
+:not(.gameArea) .gameBoard { width: 136px; height: 136px; }
+:not(.gameArea) .gameSquare { width: 16px; height: 16px; }
+:not(.gameArea) .gamePiece {
+   width: 12px;
+   height: 12px;
+   margin: 2px;
+   display: inline-block;
+}
