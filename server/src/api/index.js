@@ -1,4 +1,4 @@
-import { CompletedGame } from '../models/completedgame.js';
+import CompletedGame from '../models/completedgame.js';
 import { requestActiveGames } from '../services/gameservice/index.js';
 'use strict';
 

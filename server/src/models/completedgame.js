@@ -31,4 +31,4 @@ completedGameSchema.set('toJSON', {
 
 const CompletedGame =  mongoose.model('CompletedGame', completedGameSchema);
 
-export { CompletedGame };
+export default CompletedGame;
