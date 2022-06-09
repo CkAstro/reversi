@@ -1,4 +1,5 @@
 import { CompletedGame } from '../models/completedgame.js';
+import { requestActiveGames } from '../services/gameservice/index.js';
 'use strict';
 
 // return a list of active games 

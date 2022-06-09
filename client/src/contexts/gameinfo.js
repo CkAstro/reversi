@@ -2,6 +2,14 @@ import { useState, useEffect, useContext, createContext } from 'react';
 
 const defaultInfo = {
    playerId: null,
+   activeGame: false,
+   color: null,
+   opponent: null,
+   gameState: Array(64).fill(null),
+   turn: null,
+   activePlayer: null,
+   legalMove: null,
+   gameOver: null,
 }
 
 const GameInfoContext = createContext();

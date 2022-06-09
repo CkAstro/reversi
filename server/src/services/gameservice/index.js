@@ -3,6 +3,17 @@ import messageHandler from '../../api/websocket/messagehandler.js';
 'use strict';
 
 let activeGames = [];
+const requestActiveGames = () => {
+   if (activeGames.length === 0) return [null];    // [null] intentional
+   return activeGames.map(game => {
+      return {
+         gameId: game.gameId,
+         black: game.black ? game.black.playerId : null,
+         white: game.white ? game.white.playerId : null,
+         turn: game.gameState.turn,
+      }
+   });
+}
 
 // request playerId
 messageHandler.addListener('playerIdRequest', ({ clientId, data }) => {
@@ -15,3 +26,4 @@ messageHandler.addListener('playerIdRequest', ({ clientId, data }) => {
 });
 
 export default null;
+export { requestActiveGames };
