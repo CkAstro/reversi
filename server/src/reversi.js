@@ -3,6 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
 
+import createWebSocket from './api/websocket/index.js';
+import { clients } from './api/websocket/clients.js';
+// import { messageHandler } from './api/websocket/messagehandler';
+
 import { PORT } from './config/index.js';
 import API from './api/index.js';
 'use strict';
@@ -12,6 +16,12 @@ const app = express();
 app.use(compression());
 app.use(cors());
 app.use(express.json());
+
+// set client ping/pong function 
+//    (not necessary unless we're running on Heroku or something...)
+// messageHandler.addListener('__ping__', ({ clientId, data }) => {
+//    clients[clientId].send('__pong__', {message: '__pong__'});
+// });
 
 // ----- log ----- //
 const requestLogger = (request, response, next) => {
@@ -40,3 +50,6 @@ app.use(unknownEndpoint);
 
 // ----- listen ----- //
 const server = app.listen(PORT, () => console.log(`DataVis server running on port ${PORT}`));
+
+// ----- websocket ----- //
+const wsServer = createWebSocket(server);
