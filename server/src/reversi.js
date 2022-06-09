@@ -38,6 +38,8 @@ app.use(requestLogger);
 
 // ----- REST API ----- //
 app.get('/api/reversi/recent', API.getRecentGames);
+app.get('/api/reversi/active', API.getActiveGames);
+app.get('/api/reversi/playerId/:id', API.getPlayerGames);
 
 
 // ----- static serving ----- //

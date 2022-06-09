@@ -8,7 +8,7 @@ const InfoContainer = () => {
    const [ isActive, setIsActive ] = useState('');
    const [ gameStatus, setGameStatus ] = useState({ inGame: false, opponent: null });
 
-   const { gameInfo, setPlayerId } = useGameInfo();
+   const { gameInfo } = useGameInfo();
 
    const requestPlayerId = event => {
       event.preventDefault();
@@ -16,10 +16,6 @@ const InfoContainer = () => {
       client.send('playerIdRequest', {playerId: usernameInput});
       setIsActive('');
    }
-
-   client.addListener('playerIdUpdate', data => {
-      setPlayerId(data.playerId);
-   });
 
    const handleInput = event => setUsernameInput(event.target.value);
    const handleFocus = event => {
@@ -41,7 +37,7 @@ const InfoContainer = () => {
    const gameText = <p>You are not in a game.</p>
    const hasPlayerDisplay = <>
       <p>Welcome: {gameInfo.playerId}</p>
-      <p>{gameText}</p>
+      {gameText}
    </>;
 
    const getPlayerDisplay = <>

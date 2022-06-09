@@ -4,7 +4,7 @@ import { CompletedGame } from '../models/completedgame.js';
 // return a list of active games 
 // NOTE: this list will never be empty;
 //    if no games are running, returns an array: [null]
-// const getActiveGames = (req, res) => res.json(requestActiveGames());
+const getActiveGames = (req, res) => res.json(requestActiveGames());
 
 // get recent games from the DB
 const getRecentGames = (req, res) => {
@@ -20,7 +20,7 @@ const getPlayerGames = async (req, res) => {
 }
 
 export default {
-   // getActiveGames,
+   getActiveGames,
    getRecentGames,
    getPlayerGames
 }
