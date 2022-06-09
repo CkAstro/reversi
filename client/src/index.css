@@ -1,0 +1,73 @@
+body, html {
+   margin: 0px;
+   padding: 0px;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ----- globals ----- */
+
+:root {
+   --ncsu-dark-red: #900;
+   --ncsu-light-red: #c00;
+   --ncsu-dark-gray: #333;
+   --ncsu-mid-gray: #555;
+   --ncsu-light-gray: #cacaca;
+   --main-spacing: 20px;
+   --main-padding: 20px;
+}
+
+/* remove text selection */
+.noselect {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.noscrollbar {
+   scrollbar-width: none;
+   -ms-overflow-style: none;
+}
+.noscrollbar::-webkit-scrollbar {
+   display: none;
+}
+
+/* ----- layout troubleshooting (uncomment to view all borders) ----- */
+/* * {
+   background: #000 !important;
+   color: #0f0 !important;
+   outline: solid #f00 1px !important;
+} */
+
+
+.mainContainer {
+   width: 1000px;
+   margin: auto;
+   height: 100%;
+   box-sizing: border-box;
+}
+
+.mainLayout {
+   display: grid;
+   grid-template-rows: auto 1fr;
+   height: 100vh;
+   font-family: 'Roboto', sans-serif;
+   color: var(--ncsu-dark-gray);
+}
+
+.datavisContainer {
+   display: grid;
+   grid-template-columns: 9fr 4fr;
+   height: 100%;
+   grid-gap: var(--main-spacing);
+   padding: var(--main-spacing) 0px; /* main spacing, still for grid gap */
+   box-sizing: border-box;
+}
+
+.datavisContainer .displayArea, .toolbarArea {
+   background: var(--ncsu-light-gray);
+   border-radius: var(--main-spacing);
+   padding: var(--main-padding);
+}
