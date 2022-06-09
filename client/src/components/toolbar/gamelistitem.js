@@ -1,3 +1,4 @@
+import GameBoard from '../gameboard';
 import './index.css';
 
 const GameListItem = ({ gameInfo, onClick, isActive }) => {
@@ -16,7 +17,7 @@ const GameListItem = ({ gameInfo, onClick, isActive }) => {
                <p className='viewMatch'>View Match</p>
             </div>
          </div>
-         {/* <GameBoard/> */}
+         <GameBoard gameState={gameInfo.gameState}/>
       </div>
    );
 }

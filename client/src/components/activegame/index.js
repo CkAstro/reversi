@@ -14,7 +14,7 @@ const ActiveGame = () => {
 
    return (
       <div className='activeGame'>
-         <GameBoard activeBoard={myTurn}/>
+         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn}/>
          <p>{moveText}</p>
          {/* <SkipModal move={skip}/> */}
          {/* <GameOverModal/> */}

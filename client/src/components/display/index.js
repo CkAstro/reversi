@@ -4,14 +4,11 @@ import ActiveGame from '../activegame';
 import './index.css';
 
 const Display = () => {
-
    const { gameInfo } = useGameInfo();
 
-   // const display = gameInfo.activeGame ? 
-   //    <ActiveGame/> : 
-   //    <GameSelector/> ;
-
-   const display = <ActiveGame/>
+   const display = gameInfo.activeGame ? 
+      <ActiveGame/> : 
+      <GameSelector/> ;
    
    return (
       <div className='gameArea'>

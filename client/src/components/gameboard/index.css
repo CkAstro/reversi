@@ -33,11 +33,11 @@
    padding: 10px;
 }
 
-/* ----- mini pieces ----- */
-:not(.gameArea) .gameBoardContainer { padding: 0px; }
-:not(.gameArea) .gameBoard { width: 136px; height: 136px; }
-:not(.gameArea) .gameSquare { width: 16px; height: 16px; }
-:not(.gameArea) .gamePiece {
+/* ----- mini gameboard pieces ----- */
+.gameListItem .gameBoardContainer { padding: 0px; }
+.gameListItem .gameBoard { width: 136px; height: 136px; }
+.gameListItem .gameSquare { width: 16px; height: 16px; }
+.gameListItem .gamePiece {
    width: 12px;
    height: 12px;
    margin: 2px;

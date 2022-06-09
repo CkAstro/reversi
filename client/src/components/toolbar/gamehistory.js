@@ -28,7 +28,7 @@ const GameHistory = ({ recentGames, playerGames }) => {
    );
 
    const buildGameList = games => {
-      if (games.length === 0) return <p>Game history not available.</p>;
+      if (games.length === 0) return <p className='unavailable'>Game history not available.</p>;
 
       // reformat games before rendering a GameListItem
       return games.map((game, ind) => {
