@@ -1,15 +1,14 @@
 import { useState, useEffect, useContext, createContext } from 'react';
-import client from '../api/client';
 
 const defaultInfo = {
    playerId: null,
    activeGame: false,
    playerColor: null,
-   opponent: null,
+   opponent: {playerId: null, clientId: null},
    gameState: Array(64).fill(null),
    turn: null,
    activePlayer: null,
-   legalMove: null,
+   legalMove: true,
    gameOver: null,
 }
 
@@ -32,7 +31,16 @@ const useGameInfo = () => {
       const newInfo = {
          ..._BUGFIX_gameInfo,    // should be ...gameInfo,
          ...data,
-      };
+      }
+      _BUGFIX_gameInfo = newInfo;
+      setGameInfo(newInfo);
+   }
+
+   const resetGameInfo = () => {
+      const newInfo = {
+         ...defaultInfo,
+         playerId: _BUGFIX_gameInfo.playerId,
+      }
       _BUGFIX_gameInfo = newInfo;
       setGameInfo(newInfo);
    }
@@ -40,6 +48,7 @@ const useGameInfo = () => {
    return {
       gameInfo,
       handleInfoUpdate,
+      resetGameInfo,
    }
 }
 

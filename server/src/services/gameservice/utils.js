@@ -24,9 +24,11 @@ const handleCompletedGame = completedGame => {
    games.activeGames = games.activeGames.filter(game => game.gameId !== completedGame.gameId);
    games.completeGames = games.completeGames.concat(completedGame);
 
-   // remove active game from clients
+   // remove active game and opponents from clients
    completedGame.black.client.activeGame = null;
    completedGame.white.client.activeGame = null;
+   completedGame.black.client.opponent = null;
+   completedGame.white.client.opponent = null;
    updateClientGameList();
 }
 
