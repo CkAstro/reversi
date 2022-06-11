@@ -32,8 +32,8 @@ const initMockMatch = replayInd => {
       playerId: mockClients.black.playerId,
    }
 
-   handleNewGameRequest({ clientId: mockClients.black.clientId, data: {status: true} });
-   handleNewGameRequest({ clientId: mockClients.white.clientId, data: {opponent: whiteOpponent} });
+   handleNewGameRequest({ clientId: mockClients.black.clientId, data: {status: true} }, true);
+   handleNewGameRequest({ clientId: mockClients.white.clientId, data: {opponent: whiteOpponent} }, true);
 
    playMockMatch(match, mockClients, replayInd);
 }

@@ -47,6 +47,7 @@ const createNewGame = (client, matchType) => {
          activePlayer: newGame.activePlayer,
          legalMove: newGame.legalMove,
          gameOver: newGame.gameOver,
+         matchType: newGame.matchType,
          status: true,
       }
       if (client) {
@@ -81,7 +82,8 @@ const handleNewGameRequest = ({ clientId, data }, mock=false) => {
    }
 
    // create new game
-   const newGame = createNewGame(client);
+   const matchType = mock ? 'replay' : 'live';
+   const newGame = createNewGame(client, matchType);
 
    // update client info
    client.activeGame = newGame;

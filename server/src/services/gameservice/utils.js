@@ -14,11 +14,14 @@ const handleCompletedGame = completedGame => {
       turn: completedGame.gameState.turn,
       time: Date.now(),
    });
+   const liveMatch = completedGame.matchType === 'live';
 
-   // // save game to MongoDB
-   // gameToSave.save().then(result => {
-   //    console.log(`game ${completedGame.gameId} saved to database`);
-   // });
+   // save game to MongoDB
+   if (liveMatch) {
+      gameToSave.save().then(result => {
+         console.log(`game ${completedGame.gameId} saved to database`);
+      });
+   }
 
    // move game from active games list to complete game list
    games.activeGames = games.activeGames.filter(game => game.gameId !== completedGame.gameId);
@@ -32,8 +35,8 @@ const handleCompletedGame = completedGame => {
    black.opponent = null;
    white.opponent = null;
 
-   if (clients[black.clientId]) black.remove();
-   if (clients[white.clientId]) white.remove();
+   if (clients[black.clientId] && !liveMatch) black.remove();
+   if (clients[white.clientId] && !liveMatch) white.remove();
 
    updateClientGameList();
 }

@@ -10,6 +10,10 @@ const handleMoveRequest = ({ clientId, data }, mock=false) => {
    const activePlayer = game.activePlayer;
    const turn = gameState.turn;
 
+   if (mock && game.matchType !== 'replay') {
+      return console.log(`mock move request but game ${game.gameId} is a live game.`);
+   }
+
    // verify player can move
    if (activePlayer !== client.playerColor && !mock) {
       return console.log(`illegal move; player ${client.playerId} attempted to move while it is not their turn`);
