@@ -4,6 +4,7 @@ import cors from 'cors';
 import fs from 'fs';
 
 import gameService from './services/gameservice/index.js';
+import replayService from './services/replayservice/index.js';
 import createWebSocket from './api/websocket/index.js';
 import { clients } from './api/websocket/clients.js';
 import messageHandler from './api/websocket/messagehandler.js';
@@ -56,3 +57,6 @@ const server = app.listen(PORT, () => console.log(`DataVis server running on por
 
 // ----- websocket ----- //
 const wsServer = createWebSocket(server);
+
+// ----- replay service ----- //
+replayService.init();

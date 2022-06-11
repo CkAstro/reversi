@@ -62,12 +62,12 @@ const GameSelector = () => {
    const liveGames = () => {
       if (currentGames[0] === null) return null;
       const games = currentGames ? currentGames.filter(game => game.black && game.white) : [];
-      return games.map(game => {
+      return games.map(game => (
          <LiveGame key={game.gameId}
             gameId={game.gameId}
             text={`${game.black} vs ${game.white}`}
          />
-      });
+      ));
    }
 
    return (

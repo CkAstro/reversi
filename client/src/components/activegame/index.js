@@ -34,9 +34,15 @@ const ActiveGame = () => {
 
 
    const myTurn = gameInfo.playerColor === gameInfo.activePlayer;
-   const moveText = gameInfo.opponent.playerId ? 
-      (myTurn ? `Your move (${gameInfo.playerColor})` : `Opponent's move (${gameInfo.activePlayer})`) :
-      `You are ${gameInfo.playerColor}. Waiting on other player...`;
+
+
+   const activeGameText = myTurn ? `Your move (${gameInfo.playerColor})` : `Opponent's move (${gameInfo.activePlayer})`;
+   const altText = gameInfo.playerColor === 'observer' ? 
+      'Observing match.' : `You are ${gameInfo.playerColor}. Waiting on other player...`;
+
+
+   const moveText = gameInfo.opponent.playerId ? activeGameText : altText;
+      
 
    const skip = myTurn && gameInfo.legalMove === false && !gameInfo.gameOver;
 

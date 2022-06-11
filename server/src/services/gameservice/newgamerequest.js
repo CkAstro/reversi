@@ -53,7 +53,7 @@ const createNewGame = client => {
       } else {
          newGame.black.client.send('gameUpdate', gameUpdate);
          newGame.white.client.send('gameUpdate', gameUpdate);
-         for (observer of newGame.observers) {
+         for (const observer of newGame.observers) {
             observer.send('gameUpdate', gameUpdate);
          }
       }

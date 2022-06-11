@@ -1,7 +1,7 @@
 import { clients } from '../../api/websocket/clients.js';
 import { handleCompletedGame } from './utils.js';
 
-const handleMoveRequest = ({ clientId, data }) => {
+const handleMoveRequest = ({ clientId, data }, mock=false) => {
    const client = clients[clientId];
    const move = data.move;
 
@@ -11,7 +11,7 @@ const handleMoveRequest = ({ clientId, data }) => {
    const turn = gameState.turn;
 
    // verify player can move
-   if (activePlayer !== client.playerColor) {
+   if (activePlayer !== client.playerColor && !mock) {
       return console.log(`illegal move; player ${client.playerId} attempted to move while it is not their turn`);
    }
 
@@ -31,9 +31,6 @@ const handleMoveRequest = ({ clientId, data }) => {
       // check for legal moves
       game.legalMove = turn < 4 ? true : gameState.checkLegalMove(game.activePlayer);
       game.gameOver = game.legalMove ? null : (gameState.checkLegalMove(activePlayer) ? null : gameState.gameOver());
-
-      if (turn === 3) game.legalMove = false;
-      if (turn === 6) game.gameOver = 'white';
 
       // update players
       game.sendGameUpdate();

@@ -1,4 +1,5 @@
 import { clients } from '../../api/websocket/clients.js';
+import games from './games.js';
 
 const handleObserveGameRequest = ({ clientId, data }) => {
    const client = clients[clientId];
@@ -6,7 +7,7 @@ const handleObserveGameRequest = ({ clientId, data }) => {
 
    // get a game pointer
    let game;
-   for (const g of activeGames) {
+   for (const g of games.activeGames) {
       if (g.gameId === gameId) {
          game = g;
          break;
