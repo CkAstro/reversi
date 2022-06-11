@@ -9,7 +9,7 @@ const generateGameId = () => {
    return Date.now().toString(36).slice(3)+Math.random().toString(36).slice(7,12);
 }
 
-const createNewGame = client => {
+const createNewGame = (client, matchType) => {
    const newGame = {
       gameId: generateGameId(),
       gameState: new GameState,
@@ -24,6 +24,7 @@ const createNewGame = client => {
       },
       white: null,
       observers: [],
+      matchType: matchType,
    }
 
    // check for active players
@@ -61,7 +62,7 @@ const createNewGame = client => {
    return newGame;
 }
 
-const handleNewGameRequest = ({ clientId, data }) => {
+const handleNewGameRequest = ({ clientId, data }, mock=false) => {
    const client = clients[clientId];
    const playerId = client.playerId;
 

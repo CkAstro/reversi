@@ -25,10 +25,16 @@ const handleCompletedGame = completedGame => {
    games.completeGames = games.completeGames.concat(completedGame);
 
    // remove active game and opponents from clients
-   completedGame.black.client.activeGame = null;
-   completedGame.white.client.activeGame = null;
-   completedGame.black.client.opponent = null;
-   completedGame.white.client.opponent = null;
+   const black = completedGame.black.client;
+   const white = completedGame.white.client;
+   black.activeGame = null;
+   white.activeGame = null;
+   black.opponent = null;
+   white.opponent = null;
+
+   if (clients[black.clientId]) black.remove();
+   if (clients[white.clientId]) white.remove();
+
    updateClientGameList();
 }
 

@@ -49,6 +49,8 @@ const handleJoinGameRequest = ({ clientId, data }) => {
 
    console.log(`added player ${playerId} (${clientId}) to existing game ${gameId}`);
 
+   console.log('client count', Object.entries(clients).length);
+
    // choose randomly who goes first
    game.activePlayer = Math.random() < 0.5 ? 'black' : 'white';
 

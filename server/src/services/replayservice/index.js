@@ -13,11 +13,12 @@ const getVariableWaitTime = () => 500 + 8000 * (0.25 - (Math.random()-0.5)**2)
 let recentGameList;
 const getRecentGames = () => CompletedGame.find({});
 
-const initMockMatch = () => {
+// NOTE: we pass replayInd to ensure clientIds are unique
+const initMockMatch = replayInd => {
    const match = recentGameList[Math.floor(Math.random()*recentGameList.length)];
    const mockClients = {
-      black: new MockClient(match.black, match.black),
-      white: new MockClient(match.white, match.white),
+      black: new MockClient(match.black+replayInd, match.black),
+      white: new MockClient(match.white+replayInd, match.white),
    }
    clients[mockClients.black.clientId] = mockClients.black;
    clients[mockClients.white.clientId] = mockClients.white;
@@ -30,10 +31,10 @@ const initMockMatch = () => {
    handleNewGameRequest({ clientId: mockClients.black.clientId, data: {status: true} });
    handleNewGameRequest({ clientId: mockClients.white.clientId, data: {opponent: whiteOpponent} });
 
-   playMockMatch(match, mockClients);
+   playMockMatch(match, mockClients, replayInd);
 }
 
-const playMockMatch = (match, mockClients) => {
+const playMockMatch = (match, mockClients, replayInd) => {
    const requestMove = () => {
       const waitTime = getVariableWaitTime();
       if (mockClients.black.activeGame.observers.length === 0) return setTimeout(requestMove, 2000);
@@ -44,7 +45,7 @@ const playMockMatch = (match, mockClients) => {
       handleMoveRequest({ clientId: clientId, data: {move: move} }, true);
       legalMove && gameMove++;
 
-      if (gameMove === match.moveHistory.length) return initMockMatch();
+      if (gameMove === match.moveHistory.length) return initMockMatch(replayInd);
       const delayMove = setTimeout(requestMove, parseInt(waitTime));
    }
 
@@ -57,7 +58,9 @@ const init = async () => {
 
    // we'll just do one for now
    recentGameList = await getRecentGames();
-   initMockMatch(recentGameList);
+   for (let i=0; i<replayCount; i++) {
+      initMockMatch(i);
+   }
 
    return console.log(`replay service initialized with n=${replayCount} replays`);
 }
