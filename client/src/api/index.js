@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // baseUrl depends on localhost/website
 const baseUrl = window.location.host.includes('localhost') ? 
-   'http://localhost:3001/api/reversi' : 
+   'http://localhost:3003/api/reversi' : 
    '/api/reversi';
 
 // request all active games
