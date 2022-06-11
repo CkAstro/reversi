@@ -27,6 +27,8 @@ const handleObserveGameRequest = ({ clientId, data }) => {
 
       // wait for client page to load before sending update
       setTimeout(() => game.sendGameUpdate(client), 100);
+   } else {
+      client.send('errorMessage', {errorText: 'Game no longer exists!'});
    }
 };
 
