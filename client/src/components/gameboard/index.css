@@ -2,9 +2,8 @@
 .gameBoard {
    display: grid;
    grid-template-columns: repeat(8, 1fr);
-   grid-gap: -1px;
-   width: 328px;
-   height: 328px;
+   border: 1px solid black;
+   box-shadow: 0 0 10px #333;
 }
 
 .gameSquare {
@@ -12,38 +11,56 @@
    width: 40px;
    height: 40px;
    border: 1px solid black;
-   margin-left: -1px;
-   margin-bottom: -1px;
+   position: relative;
 }
 
 .gamePiece {
    width: 30px;
    height: 30px;
    border-radius: 50%;
-   margin: 5px;
+   position: absolute;
+   top: 5px;
+   left: 5px;
 }
 
-.gamePiece.black { background: black; transform: scale(1, 1) }
-.gamePiece.white { background: white; transform: scale(1,-1) }
-.gamePiece.black.flip { transition: background 0.5s, transform 0.5s; }
-.gamePiece.white.flip { transition: background 0.5s, transform 0.5s; }
+.gamePiece.black {
+   background: linear-gradient( rgb(0, 0, 0), rgb(50, 50, 50) );
+   box-shadow: 0 0 5px #333;
+   transform: scale(1, 1);
+}
+.gamePiece.black.top {
+   width: 24px;
+   height: 24px;
+   top: 8px;
+   left: 8px;
+   background: linear-gradient( rgb(25, 25, 25), rgb(100, 100, 100) );
+   transform: scale(1, 1);
+}
+
+.gamePiece.white {
+   background: linear-gradient( rgb(125, 125, 125), rgb(255, 255, 255) );
+   box-shadow: 0 0 5px #333;
+   transform: scale(1,-1);
+}
+.gamePiece.white.top {
+   width: 24px;
+   height: 24px;
+   top: 8px;
+   left: 8px;
+   background: linear-gradient( rgb(255, 255, 255), rgb(175, 175, 175) );
+   transform: scale(1,-1);
+}
+
+.gamePiece.black.flip, .gamePiece.black.flip.top { transition: background 0.5s, transform 0.5s; }
+.gamePiece.white.flip, .gamePiece.white.flip.top { transition: background 0.5s, transform 0.5s; }
 
 .gameSquare.place {
    z-index: 10;
    border: 1px solid #caca33;
    /* box-shadow: inset 0 0 10px #dada44, 0 0 10px #dada44; */
-   /* box-shadow: inset 0 0 10px #dada44; */
-   box-shadow: 0 0 10px #dada44;
+   box-shadow: inset 0 0 10px #dada44;
+   /* box-shadow: 0 0 10px #dada44; */
 }
-
-/* .gamePiece.black.place {
-   border: 2px solid #00dada;
-   box-sizing: border-box;
-}
-.gamePiece.white.place {
-   border: 2px solid #da00da;
-   box-sizing: border-box;
-} */
 
 .gameBoardContainer {
    display: flex;
@@ -54,11 +71,30 @@
 
 /* ----- mini gameboard pieces ----- */
 .gameListItem .gameBoardContainer { padding: 0px; }
-.gameListItem .gameBoard { width: 136px; height: 136px; }
-.gameListItem .gameSquare { width: 16px; height: 16px; }
+.gameListItem .gameBoard {
+   box-shadow: none;
+   border-left: none;
+   border-top: none;
+}
+.gameListItem .gameSquare { 
+   width: 16px; 
+   height: 16px;
+   border-right: none;
+   border-bottom: none;
+}
 .gameListItem .gamePiece {
    width: 12px;
    height: 12px;
+   position: static;
    margin: 2px;
    display: inline-block;
 }
+.gameListItem .gamePiece.black { background: linear-gradient( rgb(50, 50, 50), rgb(0, 0, 0)) }
+.gameListItem>p>.gamePiece { box-shadow: none; }
+.gameListItem .gamePiece.top { 
+   display: none;
+   width: 8px;
+   height: 8px;
+   top: 4px;
+   left: 4px;
+ }
