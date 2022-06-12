@@ -16,8 +16,18 @@ const SkipMessage = ({closeModal, isActive }) => {
    </Modal>;
 }
 
-const GameOverMessage = ({ closeModal, isActive, winner, response }) => {
+const GameOverMessage = ({ closeModal, isActive, winner, response, playerColor }) => {
    const capWinner = winner ? winner[0].toUpperCase()+winner.slice(1) : null;
+
+   const isObserver = playerColor === 'observer';
+
+   if (isObserver) return <Modal isActive={isActive} closeModal={closeModal}>
+      <h1>Game Over</h1>
+      <p><b>{capWinner}</b> wins! Return to lobby?</p>
+      <div onClick={() => response(false)} className='respondYesButton noselect'>Yes</div>
+      <div onClick={() => response(null)} className='respondNoButton noselect'>No</div>
+   </Modal>;
+
    return <Modal isActive={isActive} closeModal={closeModal}>
       <h1>Game Over</h1>
       <p><b>{capWinner}</b> wins! Would you like a rematch?</p>

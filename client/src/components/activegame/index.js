@@ -47,7 +47,7 @@ const ActiveGame = () => {
 
    const handleEndGameResponse = response => {
       const opponent = gameInfo.opponent;
-      resetGameInfo();
+      if (response !== null) resetGameInfo();
       if (response) return client.send('newGameRequest', {opponent: opponent});
    }
 
@@ -68,7 +68,7 @@ const ActiveGame = () => {
    return (
       <div className='activeGame'>
          <Modal.SkipMessage closeModal={closeSkipModal} isActive={skipModalActive}/>
-         <Modal.GameOverMessage closeModal={closeEndModal} isActive={endModalActive} winner={gameInfo.gameOver} response={handleEndGameResponse}/>
+         <Modal.GameOverMessage closeModal={closeEndModal} isActive={endModalActive} winner={gameInfo.gameOver} response={handleEndGameResponse} playerColor={gameInfo.playerColor}/>
          <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} test={test}/>
          <p>{moveText}</p>
       </div>
