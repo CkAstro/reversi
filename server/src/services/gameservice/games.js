@@ -12,6 +12,7 @@ const requestActiveGames = () => {
          black: game.black ? game.black.playerId : null,
          white: game.white ? game.white.playerId : null,
          turn: game.gameState.turn,
+         matchType: game.matchType,
       }
    });
 }

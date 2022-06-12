@@ -10,6 +10,25 @@ const ActiveGame = () => {
    const [ endModalActive, setEndModalActive ] = useState(false);
    const { gameInfo, handleInfoUpdate, resetGameInfo } = useGameInfo();
 
+   const [ lastGameState, setLastGameState ] = useState(Array(64).fill(null));
+   const [ test, setTest ] = useState(Array(64).fill(null));
+   useEffect(() => {
+      const newInteract = Array(64).fill(null);
+      for (let i=0; i<64; i++) {
+         if (test[i] !== null) {
+            newInteract[i] = 'flip';
+         } else if (lastGameState[i] === null && gameInfo.gameState[i] !== null) {
+            newInteract[i] = 'place flip';
+         } else if (lastGameState[i] !== null && gameInfo.gameState[i] !== lastGameState[i]) {
+            newInteract[i] = 'flip';
+         } else {
+            newInteract[i] = null;
+         }
+      }
+      setTest(newInteract);
+      setLastGameState(gameInfo.gameState.slice());
+   }, [gameInfo.gameState]);
+
    // listen for game update (player makes a move, etc)
    client.addListener('gameUpdate', handleInfoUpdate);
 
@@ -50,7 +69,7 @@ const ActiveGame = () => {
       <div className='activeGame'>
          <Modal.SkipMessage closeModal={closeSkipModal} isActive={skipModalActive}/>
          <Modal.GameOverMessage closeModal={closeEndModal} isActive={endModalActive} winner={gameInfo.gameOver} response={handleEndGameResponse}/>
-         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn}/>
+         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} test={test}/>
          <p>{moveText}</p>
       </div>
    );

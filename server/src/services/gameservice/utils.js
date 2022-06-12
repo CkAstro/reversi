@@ -49,6 +49,7 @@ const updateClientGameList = () => {
          gameId: game.gameId,
          black: game.black ? game.black.playerId : null,
          white: game.white ? game.white.playerId : null,
+         matchType: game.matchType,
       }
    });
 

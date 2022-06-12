@@ -2,7 +2,7 @@ import GameSquare from './gamesquare';
 import client from '../../api/client';
 import './index.css';
 
-const GameBoard = ({ gameState, activeBoard }) => {
+const GameBoard = ({ test, gameState, activeBoard }) => {
    const requestMove = ind => {
       if (activeBoard) client.send('moveRequest', {move: ind});
    }
@@ -12,6 +12,7 @@ const GameBoard = ({ gameState, activeBoard }) => {
       return gameState.map((val, ind) => {
          return <GameSquare key={ind}
             value={val}
+            test={test ? test[ind] : null}
             onClick={() => requestMove(ind)}
          />
       });

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import API from '../../api';
 import client from '../../api/client';
+import LiveGame from './livegame';
 import './index.css';
 
 const NewGame = () => {
@@ -18,16 +19,6 @@ const WaitingGame = ({ gameId, text }) => {
    
    return (
       <div className='game waitingGame' onClick={requestJoinGame}>
-         <p>{text}</p>
-      </div>
-   );
-}
-
-const LiveGame = ({ gameId, text }) => {
-   const requestObserveGame = () => client.send('observeGameRequest', {gameId: gameId});
-
-   return (
-      <div className='game liveGame' onClick={requestObserveGame}>
          <p>{text}</p>
       </div>
    );
@@ -62,12 +53,7 @@ const GameSelector = () => {
    const liveGames = () => {
       if (currentGames[0] === null) return null;
       const games = currentGames ? currentGames.filter(game => game.black && game.white) : [];
-      return games.map(game => (
-         <LiveGame key={game.gameId}
-            gameId={game.gameId}
-            text={`${game.black} vs ${game.white}`}
-         />
-      ));
+      return games.map(game => <LiveGame key={game.gameId} gameInfo={game}/>);
    }
 
    return (

@@ -23,8 +23,27 @@
    margin: 5px;
 }
 
-.gamePiece.black { background: black; }
-.gamePiece.white { background: white; }
+.gamePiece.black { background: black; transform: scale(1, 1) }
+.gamePiece.white { background: white; transform: scale(1,-1) }
+.gamePiece.black.flip { transition: background 0.5s, transform 0.5s; }
+.gamePiece.white.flip { transition: background 0.5s, transform 0.5s; }
+
+.gameSquare.place {
+   z-index: 10;
+   border: 1px solid #caca33;
+   /* box-shadow: inset 0 0 10px #dada44, 0 0 10px #dada44; */
+   /* box-shadow: inset 0 0 10px #dada44; */
+   box-shadow: 0 0 10px #dada44;
+}
+
+/* .gamePiece.black.place {
+   border: 2px solid #00dada;
+   box-sizing: border-box;
+}
+.gamePiece.white.place {
+   border: 2px solid #da00da;
+   box-sizing: border-box;
+} */
 
 .gameBoardContainer {
    display: flex;
