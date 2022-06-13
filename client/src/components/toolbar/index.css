@@ -15,15 +15,26 @@
 
 /* ----- username / info area ----- */
 .toolbarArea .infoContainer { height: 200px; }
-
-.toolbarArea form>input { color: var(--ncsu-dark-gray); }
-.toolbarArea form>input:not(.active) { color: #999; }
-.toolbarArea form>button {
-   color: var(--ncsu-dark-gray);
-   margin-left: 5px;
+.infoContainer>.gameText {
+   background: #bababa;
+   padding: 12px;
+}
+.infoContainer>.gameText>p:first-child {
+   text-align: center;
+   border-bottom: 1px dotted var(--ncsu-dark-gray);
+   margin: 0px;
+   padding: 0px;
 }
 
+.toolbarArea form {
+   display: grid;
+   grid-template-columns: 1fr auto;
+   grid-column-gap: 6px;
+}
 
+.toolbarArea form>input { color: var(--ncsu-dark-gray); width: 96%; }
+.toolbarArea form>input:not(.active) { color: #999; }
+.toolbarArea form>button { color: var(--ncsu-dark-gray); }
 
 .gameHistory {
    display: grid;

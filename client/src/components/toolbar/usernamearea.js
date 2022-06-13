@@ -1,21 +1,5 @@
-import { useState } from 'react';
-import client from '../../api/client';
-import { useGameInfo } from '../../contexts/gameinfo';
-import GameInfo from './gameinfoarea';
+import { client } from '../../api/client';
 import './index.css';
-
-const InfoContainer = () => {
-   const { gameInfo } = useGameInfo();
-
-   const gameText = gameInfo.activeGame ? <GameInfo/> : <p>You are not currently in a game.</p>;
-
-   return (
-      <div className='infoContainer'>
-         <UsernameArea playerId={gameInfo.playerId}/>
-         {gameInfo.playerId ? gameText : null}
-      </div>
-   );
-}
 
 const UsernameArea = ({ playerId }) => {
    const [ usernameInput, setUsernameInput ] = useState('username...');
@@ -55,4 +39,4 @@ const UsernameArea = ({ playerId }) => {
    return display;
 }
 
-export default InfoContainer;
+export default UsernameArea;
