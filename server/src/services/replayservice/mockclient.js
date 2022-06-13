@@ -8,7 +8,7 @@ class MockClient {
       this.playerId = playerId,
       this.socket = null;
       this.activeGame = null;
-      this.activeColor = null;
+      this.playerColor = null;
       this.opponent = null;
    }
 

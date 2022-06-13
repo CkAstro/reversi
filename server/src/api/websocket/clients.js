@@ -7,7 +7,7 @@ class Client {
       this.playerId = null;                  // player username
       this.socket = socket;                  // live websocket connection
       this.activeGame = null;                // playing or observing
-      this.activeColor = null;               // player color (remains null if observing)
+      this.playerColor = null;               // player color (remains null if observing)
       this.opponent = null;                  // player opponent (remains null if observing)
       // send(),                             // method to send data to client
       // remove(),                           // method to remove client from active game and client list
