@@ -42,6 +42,9 @@ const createWebSocket = expressServer => {
       connection.on('close', () => {
          const clientId = connection.clientId;
          const client = clients[clientId];
+         if (client.activeGame && client.activeGame.matchType === 'live' && client.opponent) {
+            client.opponent.send('errorMessage', {errorText: `Your opponent ${client.playerId} has disconnected.`})
+         }
          client.remove();
          console.log(`connection closed with client ${clientId}`);
       });
