@@ -47,35 +47,35 @@ const handleJoinGameRequest = ({ clientId, data }) => {
          playerId: playerId,
          status: true,
       }
+      client.playerColor = 'white';
+      client.opponent = game.black.client;
    } else {
       game.black = {
          client: client,
          playerId: playerId,
          status: true,
       }
+      client.playerColor = 'black';
+      client.opponent = game.white.client;
    }
-
-   console.log(`added player ${playerId} (${clientId}) to existing game ${gameId}`);
-
-   console.log('client count', Object.entries(clients).length);
-
-   // choose randomly who goes first
-   game.activePlayer = Math.random() < 0.5 ? 'black' : 'white';
 
    // update client info
    client.activeGame = game;
-   client.playerColor = 'white';
-   client.opponent = game.black.client;
    client.opponent.opponent = client;
+
+   console.log(`added player ${playerId} (${clientId}) to existing game ${gameId}`);
+
+   // choose randomly who goes first
+   if (!game.activePlayer) game.activePlayer = Math.random() < 0.5 ? 'black' : 'white';
 
    client.send('activeGameUpdate', {
       activeGame: true, 
-      playerColor: 'white', 
+      playerColor: client.playerColor, 
       opponent: {playerId: client.opponent.playerId, clientId: client.opponent.clientId},
    });
    client.opponent.send('activeGameUpdate', {
       activeGame: true, 
-      playerColor: 'black', 
+      playerColor: client.opponent.playerColor, 
       opponent: {playerId: client.playerId, clientId: client.clientId},
    });
 
