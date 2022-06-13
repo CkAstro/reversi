@@ -3,11 +3,12 @@ import { clients } from '../../api/websocket/clients.js';
 const handleLeaveGameRequest = ({ clientId }) => {
    const client = clients[clientId];
    const activeGame = client.activeGame;
-   
    if (!activeGame) return console.log(`client ${clientId} attempted to leave game, but they are not in a game`);
 
    // remove if observing
-   if (activeGame.matchType === 'replay' || clientId !== activeGame.black.clientId && client.playerId !== activeGame.white.clientId) {
+   const blackId = activeGame.black ? activeGame.black.client.clientId : null;
+   const whiteId = activeGame.white ? activeGame.white.client.clientId : null;
+   if (activeGame.matchType === 'replay' || (clientId !== blackId && clientId !== whiteId)) {
       activeGame.observers = activeGame.observers.filter(obs => obs.clientId !== clientId);
       client.activeGame = null;
       return;
