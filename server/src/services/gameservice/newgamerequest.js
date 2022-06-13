@@ -48,6 +48,8 @@ const createNewGame = (client, matchType) => {
          legalMove: newGame.legalMove,
          gameOver: newGame.gameOver,
          matchType: newGame.matchType,
+         black: newGame.black ? newGame.black.playerId : null,
+         white: newGame.white ? newGame.white.playerId : null,
          status: true,
       }
       if (client) {
@@ -88,7 +90,7 @@ const handleNewGameRequest = ({ clientId, data }, mock=false) => {
    // update client info
    client.activeGame = newGame;
    client.playerColor = 'black';
-   client.send('activeGameUpdate', {activeGame: true, playerColor: 'black', opponent: {playerId: null, clientId: null}});
+   client.send('activeGameUpdate', {activeGame: true, playerColor: 'black', black: playerId});
 
    // add to active games and notify all clients
    games.activeGames = games.activeGames.concat(newGame);

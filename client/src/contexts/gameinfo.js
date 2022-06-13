@@ -10,6 +10,8 @@ const defaultInfo = {
    activePlayer: null,
    legalMove: true,
    gameOver: null,
+   black: null,
+   white: null,
 }
 
 const GameInfoContext = createContext();

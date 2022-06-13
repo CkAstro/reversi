@@ -1,12 +1,12 @@
 import { useGameInfo } from '../../contexts/gameinfo';
-import GameInfo from './gameinfoarea';
+import GameInfoArea from './gameinfoarea';
 import UsernameArea from './usernamearea';
 import './index.css';
 
 const InfoContainer = () => {
    const { gameInfo } = useGameInfo();
 
-   const gameText = gameInfo.activeGame ? <GameInfo/> : <p>You are not currently in a game.</p>;
+   const gameText = gameInfo.activeGame ? <GameInfoArea/> : <p>You are not currently in a game.</p>;
 
    return (
       <div className='infoContainer'>

@@ -23,6 +23,8 @@ const handleObserveGameRequest = ({ clientId, data }) => {
          activeGame: true, 
          playerColor: 'observer', 
          opponent: `${game.black.playerId} vs ${game.white.playerId}`,
+         black: game.black.playerId,
+         white: game.white.playerId,
       });
 
       // wait for client page to load before sending update
