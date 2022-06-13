@@ -8,3 +8,6 @@
 
 # test files
 **/*.test.*
+
+# logs
+logs/*
