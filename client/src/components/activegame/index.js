@@ -60,7 +60,8 @@ const ActiveGame = () => {
    const altText = gameInfo.playerColor === 'observer' ? 
       'Observing match.' : `You are ${gameInfo.playerColor}. Waiting on other player...`;
 
-
+      
+   const playerText = `${gameInfo.playerColor === 'observer' ? gameInfo.opponent : gameInfo.opponent.playerId}`;
    const moveText = gameInfo.opponent.playerId ? activeGameText : altText;
 
    return (<>
@@ -68,6 +69,7 @@ const ActiveGame = () => {
       <div className='activeGame'>
          <Modal.SkipMessage closeModal={closeSkipModal} isActive={skipModalActive}/>
          <Modal.GameOverMessage closeModal={closeEndModal} isActive={endModalActive} winner={gameInfo.gameOver} response={handleEndGameResponse} playerColor={gameInfo.playerColor}/>
+         <p>{playerText}</p>
          <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} test={test}/>
          <p>{moveText}</p>
       </div>
