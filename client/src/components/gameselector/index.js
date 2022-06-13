@@ -1,28 +1,8 @@
 import { useState, useEffect } from 'react';
 import API from '../../api';
 import client from '../../api/client';
-import LiveGame from './livegame';
+import GameObject from './gameobject';
 import './index.css';
-
-const NewGame = () => {
-   const requestNewGame = () => client.send('newGameRequest', {status: true});
-
-   return (
-      <div className='game newGame' onClick={requestNewGame}>
-         <p>Start New Game</p>
-      </div>
-   );
-}
-
-const WaitingGame = ({ gameId, text }) => {
-   const requestJoinGame = () => client.send('joinGameRequest', {gameId: gameId});
-   
-   return (
-      <div className='game waitingGame' onClick={requestJoinGame}>
-         <p>{text}</p>
-      </div>
-   );
-}
 
 const GameSelector = () => {
    const [ currentGames, setCurrentGames ] = useState([]);
@@ -37,30 +17,45 @@ const GameSelector = () => {
       setCurrentGames(data);
    });
 
+   const newGame = () => {
+      const requestNewGame = () => client.send('newGameRequest', {status: true});
+      return <GameObject key={0}
+         onClick={() => requestNewGame()}
+      />;
+   }
+
    // sort current games for those waiting on a player
    const waitingGames = () => {
+      const requestJoinGame = gameId => client.send('joinGameRequest', {gameId: gameId});
       if (currentGames[0] === null) return null;
       const games = currentGames ? currentGames.filter(game => (game.black || game.white) && !(game.black && game.white)) : [];
-      return games.map(game => (
-         <WaitingGame key={game.gameId}
-            gameId={game.gameId}
-            text={game.black ? game.black : game.white}
-         />
-      ));
+      return games.map(game => <GameObject key={game.gameId} 
+         black={game.black}
+         white={game.white}
+         matchType={game.matchType}
+         onClick={() => requestJoinGame(game.gameId)}
+      />);
    }
 
    // sort current games for those with both players
    const liveGames = () => {
+      const requestObserveGame = gameId => client.send('observeGameRequest', {gameId: gameId});
+
       if (currentGames[0] === null) return null;
       const games = currentGames ? currentGames.filter(game => game.black && game.white) : [];
-      return games.map(game => <LiveGame key={game.gameId} gameInfo={game}/>);
+      return games.map(game => <GameObject key={game.gameId} 
+         black={game.black}
+         white={game.white}
+         matchType={game.matchType}
+         onClick={() => requestObserveGame(game.gameId)}
+      />);
    }
 
    return (
       <div className='gameSelectContainer'>
          <div className='gameSelect'>
             <p>Join a Game</p>
-            <NewGame key={0}/>
+            {newGame()}
             {waitingGames()}
          </div>
          <div className='gameSelect'>

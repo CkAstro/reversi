@@ -30,7 +30,7 @@
    height: 200px;
    margin: 0px;
    box-sizing: border-box;
-   padding: 6px;
+   padding: 20px;
    border: 3px solid var(--ncsu-dark-gray);
    border-radius: 20px;
    display: flex;
@@ -41,21 +41,27 @@
    font-size: 30px;
    font-weight: bold;
    cursor: pointer;
+   position: relative;
 }
 
-.game>p {
-   margin: 0px;
-   padding: 0px;
+.game p {
+   justify-self: center;
+   text-align: center;
+   /* margin: 0px; */
+   /* white-space: nowrap; */
+   /* color: white; */
 }
 
 .game>.replayMatch {
    font-size: 18px;
    color: var(--ncsu-light-red);
-   margin-top: auto;
+   position: absolute;
+   bottom: -6px;
 }
 
 .game>.liveMatch {
    font-size: 18px;
    color: green;
-   margin-top: auto;
+   position: absolute;
+   bottom: -6px;
 }
