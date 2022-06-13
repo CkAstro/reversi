@@ -14,11 +14,11 @@ const ActiveGame = () => {
    const { gameInfo, handleInfoUpdate, resetGameInfo } = useGameInfo();
 
    const [ lastGameState, setLastGameState ] = useState(Array(64).fill(null));
-   const [ test, setTest ] = useState(Array(64).fill(null));
+   const [ renderState, setRenderState ] = useState(Array(64).fill(null));
    useEffect(() => {
       const newInteract = Array(64).fill(null);
       for (let i=0; i<64; i++) {
-         if (test[i] !== null) {
+         if (renderState[i] !== null) {
             newInteract[i] = 'flip';
          } else if (lastGameState[i] === null && gameInfo.gameState[i] !== null) {
             newInteract[i] = 'place flip';
@@ -28,7 +28,7 @@ const ActiveGame = () => {
             newInteract[i] = null;
          }
       }
-      setTest(newInteract);
+      setRenderState(newInteract);
       setLastGameState(gameInfo.gameState.slice());
    }, [gameInfo.gameState]);
 
@@ -72,7 +72,7 @@ const ActiveGame = () => {
       />
       <div className='activeGame'>
          <OpponentDisplay/>
-         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} test={test}/>
+         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} renderState={renderState}/>
          <MoveDisplay/>
       </div>
    </>);
