@@ -8,7 +8,7 @@ import { clients } from '../../api/websocket/clients.js';
 // goal here is to always have a replay going; chosen from completed games
 // mainly allows recruiters to test the observe function...
 
-const getVariableWaitTime = () => Math.floor(500 + 8000 * (0.25 - (Math.random()-0.5)**2));
+const getVariableWaitTime = () => Math.floor(1500 + 10000 * (0.25 - (Math.random()-0.5)**2));
 
 let recentGameList;
 const getRecentGames = () => CompletedGame.find({});
