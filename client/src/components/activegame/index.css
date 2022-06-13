@@ -19,3 +19,6 @@
    width: auto;
    cursor: pointer;
 }
+
+.playerNameText { font-size: 24px; font-weight: bold; }
+.playerVsText { padding: 0px 12px; }

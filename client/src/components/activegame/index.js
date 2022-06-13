@@ -3,6 +3,9 @@ import { useGameInfo } from '../../contexts/gameinfo';
 import client from '../../api/client';
 import GameBoard from '../gameboard';
 import Modal from '../modal';
+import BackButton from './backbutton';
+import MoveDisplay from './movedisplay';
+import OpponentDisplay from './opponentdisplay';
 import './index.css';
 
 const ActiveGame = () => {
@@ -51,33 +54,28 @@ const ActiveGame = () => {
       if (gameInfo.activeGame) client.send('leaveGameRequest', {status: true});
       if (response) return client.send('newGameRequest', {opponent: opponent});
    }
-
-
+   
    const myTurn = gameInfo.playerColor === gameInfo.activePlayer;
-
-
-   const activeGameText = myTurn ? `Your move (${gameInfo.playerColor})` : `Opponent's move (${gameInfo.activePlayer})`;
-   const altText = gameInfo.playerColor === 'observer' ? 
-      'Observing match.' : `You are ${gameInfo.playerColor}. Waiting on other player...`;
-
-      
-   const playerText = `${gameInfo.playerColor === 'observer' ? gameInfo.opponent : gameInfo.opponent.playerId}`;
-   const moveText = gameInfo.opponent.playerId ? activeGameText : altText;
 
    return (<>
       <BackButton onClick={() => handleEndGameResponse(false)}/>
+      <Modal.SkipMessage 
+         closeModal={closeSkipModal} 
+         isActive={skipModalActive}
+      />
+      <Modal.GameOverMessage 
+         closeModal={closeEndModal} 
+         isActive={endModalActive} 
+         winner={gameInfo.gameOver} 
+         response={handleEndGameResponse} 
+         playerColor={gameInfo.playerColor}
+      />
       <div className='activeGame'>
-         <Modal.SkipMessage closeModal={closeSkipModal} isActive={skipModalActive}/>
-         <Modal.GameOverMessage closeModal={closeEndModal} isActive={endModalActive} winner={gameInfo.gameOver} response={handleEndGameResponse} playerColor={gameInfo.playerColor}/>
-         <p>{playerText}</p>
+         <OpponentDisplay/>
          <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} test={test}/>
-         <p>{moveText}</p>
+         <MoveDisplay/>
       </div>
    </>);
-}
-
-const BackButton = ({ onClick }) => {
-   return <div className='backButton' onClick={onClick}>Return to Lobby</div>
 }
 
 export default ActiveGame;
