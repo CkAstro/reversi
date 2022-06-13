@@ -1,4 +1,5 @@
 import { clients } from '../../api/websocket/clients.js';
+import { updateClientGameList } from './utils.js';
 
 const handleLeaveGameRequest = ({ clientId }) => {
    const client = clients[clientId];
@@ -22,10 +23,14 @@ const handleLeaveGameRequest = ({ clientId }) => {
    client.activeGame = null;
    activeGame[client.playerColor] = null;
    if (opponent) opponent.opponent = null;
+   client.opponent = null;
    activeGame.observers = activeGame.observers.filter(obs => obs.clientId !== clientId);
 
    // remove game if necessary
    if (!activeGame.hasPlayers()) activeGame.remove();
+
+   // update everyone 
+   updateClientGameList();
 }
 
 export default handleLeaveGameRequest;

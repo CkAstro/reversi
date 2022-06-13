@@ -41,10 +41,18 @@ const handleJoinGameRequest = ({ clientId, data }) => {
    }
 
    // add player to game
-   game.white = {
-      client: client,
-      playerId: playerId,
-      status: true,
+   if (game.black) {
+      game.white = {
+         client: client,
+         playerId: playerId,
+         status: true,
+      }
+   } else {
+      game.black = {
+         client: client,
+         playerId: playerId,
+         status: true,
+      }
    }
 
    console.log(`added player ${playerId} (${clientId}) to existing game ${gameId}`);

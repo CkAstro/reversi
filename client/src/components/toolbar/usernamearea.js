@@ -1,4 +1,5 @@
-import { client } from '../../api/client';
+import { useState } from 'react';
+import client from '../../api/client';
 import './index.css';
 
 const UsernameArea = ({ playerId }) => {
