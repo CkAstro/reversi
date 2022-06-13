@@ -13,7 +13,7 @@ const Reversi = () => {
    }, []);
    
    return (
-      <div className='datavisContainer'>
+      <div className='reversiContainer'>
          <GameInfoProvider>
             <Display/>
             <Toolbar/>

@@ -57,7 +57,7 @@ body, html {
    color: var(--ncsu-dark-gray);
 }
 
-.datavisContainer {
+.reversiContainer {
    display: grid;
    grid-template-columns: 9fr 4fr;
    height: 100%;
@@ -66,7 +66,7 @@ body, html {
    box-sizing: border-box;
 }
 
-.datavisContainer .displayArea, .toolbarArea {
+.reversiContainer .toolbarArea {
    background: var(--ncsu-light-gray);
    border-radius: var(--main-spacing);
    padding: var(--main-padding);

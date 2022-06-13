@@ -48,6 +48,7 @@ const ActiveGame = () => {
    const handleEndGameResponse = response => {
       const opponent = gameInfo.opponent;
       if (response !== null) resetGameInfo();
+      if (gameInfo.activeGame) client.send('leaveGameRequest', {status: true});
       if (response) return client.send('newGameRequest', {opponent: opponent});
    }
 
@@ -61,18 +62,20 @@ const ActiveGame = () => {
 
 
    const moveText = gameInfo.opponent.playerId ? activeGameText : altText;
-      
 
-   const skip = myTurn && gameInfo.legalMove === false && !gameInfo.gameOver;
-
-   return (
+   return (<>
+      <BackButton onClick={() => handleEndGameResponse(false)}/>
       <div className='activeGame'>
          <Modal.SkipMessage closeModal={closeSkipModal} isActive={skipModalActive}/>
          <Modal.GameOverMessage closeModal={closeEndModal} isActive={endModalActive} winner={gameInfo.gameOver} response={handleEndGameResponse} playerColor={gameInfo.playerColor}/>
          <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} test={test}/>
          <p>{moveText}</p>
       </div>
-   );
+   </>);
+}
+
+const BackButton = ({ onClick }) => {
+   return <div className='backButton' onClick={onClick}>Return to Lobby</div>
 }
 
 export default ActiveGame;
