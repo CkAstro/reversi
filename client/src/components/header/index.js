@@ -1,13 +1,13 @@
 import NavBar from './navbar';
-import './header.css';
+import style from './header.module.css';
 
 const Header = () => {
    return (
       <div>
-         <div className='header'>
+         <div className={style.header}>
             <div className='mainContainer'>
                <h1>Christopher Kolb</h1>
-               <h2>Computational Astrophysics</h2>
+               <h2>Computational Astrophysics + Full Stack Development</h2>
             </div>
          </div>
          <NavBar/>

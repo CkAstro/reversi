@@ -1,8 +1,8 @@
-import './header.css';
+import style from './header.module.css';
 
 const NavBar = () => {
    return (
-      <div className='navbar'>
+      <div className={style.navbar}>
          <div className='mainContainer'>
             <a className='noselect' href='https://chriskolb.dev'><div>Home</div></a>
             <a className='noselect' href='https://chriskolb.dev/#/projects'><div>Projects</div></a>
@@ -10,7 +10,7 @@ const NavBar = () => {
             <a className='noselect' href='https://chriskolb.dev/#/coding'><div>Coding</div></a>
             <a className='noselect' href='https://chriskolb.dev/#/papers'><div>Papers</div></a>
             <a className='noselect' href='https://chriskolb.dev/#/about'><div>About</div></a>
-            <div className='active noselect'>Reversi</div>
+            <div className={`noselect ${style.active}`}>Reversi</div>
          </div>
       </div>
    );
