@@ -6,7 +6,7 @@ import Modal from '../modal';
 import BackButton from './backbutton';
 import MoveDisplay from './movedisplay';
 import OpponentDisplay from './opponentdisplay';
-import './index.css';
+import style from './activegame.module.css';
 
 const ActiveGame = () => {
    const [ skipModalActive, setSkipModalActive ] = useState(false);
@@ -70,7 +70,7 @@ const ActiveGame = () => {
          response={handleEndGameResponse} 
          playerColor={gameInfo.playerColor}
       />
-      <div className='activeGame'>
+      <div className={style.activeGame}>
          <OpponentDisplay/>
          <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} renderState={renderState}/>
          <MoveDisplay/>
