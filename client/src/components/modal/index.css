@@ -50,8 +50,33 @@
    background: #cacaca;
    cursor: pointer;
 }
-
 .modal .confirmButton:hover { background: #aaa; }
+
+.modal .respondYesButton, 
+.modal .respondNoButton {
+   padding: 6px 15px;
+   border: none;
+   border-radius: 6px;
+   font-weight: bold;
+   background: #cacaca;
+   cursor: pointer;
+}
+.modal .respondYesButton:hover,
+.modal .respondNoButton:hover {
+   background: #aaa;
+}
+
+.modal .respondYesButton {
+   position: absolute;
+   bottom: 10px;
+   right: 70px;
+}
+
+.modal .respondNoButton {
+   position: absolute;
+   bottom: 10px;
+   right: 10px;
+}
 
 .modal h1 {
    margin: 0px;
@@ -63,10 +88,6 @@
 
 .modal p {
    margin-bottom: 0px;
-   /* margin: 0px;
-   margin-top: 16px;
-   margin-bottom: 16px;
-   padding: 0px; */
 }
 
 .modal p:last-child {

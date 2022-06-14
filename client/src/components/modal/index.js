@@ -2,17 +2,17 @@ import './index.css';
 
 const ServerMessage = ({closeModal, isActive, children }) => {
    return <Modal isActive={isActive} closeModal={closeModal}>
+      <div className='confirmButton noselect'>Confirm</div>
       <h1>Server Message</h1>
       {children}
-      <div className='confirmButton noselect'>Confirm</div>
    </Modal>;
 }
 
 const SkipMessage = ({closeModal, isActive }) => {
    return <Modal isActive={isActive} closeModal={closeModal}>
+      <div className='confirmButton noselect'>Skip</div>
       <h1>No Legal Move</h1>
       <p>You have no legal move. You must skip your turn.</p>
-      <div className='confirmButton noselect'>Skip</div>
    </Modal>;
 }
 
@@ -22,17 +22,17 @@ const GameOverMessage = ({ closeModal, isActive, winner, response, playerColor }
    const isObserver = playerColor === 'observer';
 
    if (isObserver) return <Modal isActive={isActive} closeModal={closeModal}>
-      <h1>Game Over</h1>
-      <p><b>{capWinner}</b> wins! Return to lobby?</p>
       <div onClick={() => response(false)} className='respondYesButton noselect'>Yes</div>
       <div onClick={() => response(null)} className='respondNoButton noselect'>No</div>
+      <h1>Game Over</h1>
+      <p><b>{capWinner}</b> wins! Return to lobby?</p>
    </Modal>;
 
    return <Modal isActive={isActive} closeModal={closeModal}>
-      <h1>Game Over</h1>
-      <p><b>{capWinner}</b> wins! Would you like a rematch?</p>
       <div onClick={() => response(true)} className='respondYesButton noselect'>Yes</div>
       <div onClick={() => response(false)} className='respondNoButton noselect'>No</div>
+      <h1>Game Over</h1>
+      <p><b>{capWinner}</b> wins! Would you like a rematch?</p>
    </Modal>
 }
 
