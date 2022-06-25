@@ -1,4 +1,5 @@
 import GameState from '../../utils/gamestate/index.js';
+'use strict';
 
 class Game {
    constructor(client, matchType) {
