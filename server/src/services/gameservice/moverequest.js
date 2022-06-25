@@ -1,5 +1,7 @@
 import { clients } from '../../api/websocket/clients.js';
-import { handleCompletedGame } from './utils.js';
+import { updateClientGameList } from './utils.js';
+import gameManager from './gamemanager.js';
+'use strict';
 
 const handleMoveRequest = ({ clientId, data }, mock=false) => {
    const client = clients[clientId];
@@ -36,9 +38,11 @@ const handleMoveRequest = ({ clientId, data }, mock=false) => {
       game.legalMove = turn < 4 ? true : gameState.checkLegalMove(game.activePlayer);
       game.gameOver = game.legalMove ? null : (gameState.checkLegalMove(activePlayer) ? null : gameState.gameOver());
 
-      // update players
+      // update playersa
       game.sendGameUpdate();
-      if (game.gameOver) handleCompletedGame(game)
+      // if (game.gameOver) handleCompletedGame(game)
+      if (game.gameOver) gameManager.recordGame(game);
+      updateClientGameList();
    } else {
       // console.log('could not place');
    }
