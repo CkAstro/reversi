@@ -1,11 +1,11 @@
 import CompletedGame from '../models/completedgame.js';
-import { requestActiveGames } from '../services/gameservice/games.js';
+import gameManager from '../services/gameservice/gamemanager.js';
 'use strict';
 
 // return a list of active games 
 // NOTE: this list will never be empty;
 //    if no games are running, returns an array: [null]
-const getActiveGames = (req, res) => res.json(requestActiveGames());
+const getActiveGames = (req, res) => res.json(gameManager.requestActiveGames());
 
 // get recent games from the DB
 const getRecentGames = (req, res) => {
@@ -20,8 +20,5 @@ const getPlayerGames = async (req, res) => {
    res.json(black.concat(white));
 }
 
-export default {
-   getActiveGames,
-   getRecentGames,
-   getPlayerGames
-}
+export { getActiveGames, getRecentGames, getPlayerGames }
+export default { getActiveGames, getRecentGames, getPlayerGames }
