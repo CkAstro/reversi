@@ -1,5 +1,6 @@
 import MockClient from './mockclient.js';
 import CompletedGame from '../../models/completedgame.js';
+import gameManager from '../gameservice/gamemanager.js';
 import handleNewGameRequest from '../gameservice/newgamerequest.js';
 import handleMoveRequest from '../gameservice/moverequest.js';
 import { replayCount } from '../../config/index.js';
@@ -48,7 +49,11 @@ const playMockMatch = (match, mockClients, replayInd) => {
       handleMoveRequest({ clientId: clientId, data: {move: move} }, true);
       legalMove && gameMove++;
 
-      if (gameMove === match.moveHistory.length) return initMockMatch(replayInd);
+      if (gameMove === match.moveHistory.length) {
+         gameManager.requestLeaveGame(mockClients.black);
+         gameManager.requestLeaveGame(mockClients.white);
+         return initMockMatch(replayInd);
+      }
       setTimeout(requestMove, getVariableWaitTime());
    }
 
