@@ -1,3 +1,4 @@
+import gameManager from '../../services/gameservice/gamemanager.js';
 'use strict';
 
 class Client {
@@ -25,18 +26,7 @@ class Client {
 
    // remove client from active game, client list
    remove() {
-      if (this.activeGame) {
-         // are we a player or observer?
-         if (this.playerColor) {
-            this.activeGame[this.playerColor] = null;
-            if (this.opponent && this.opponent.opponent) this.opponent.opponent = null;
-         } else {
-            this.activeGame.observers = this.activeGame.observers.filter(obs => obs.clientId !== this.clientId);
-         }
-         // remove game
-         if (!this.activeGame.hasPlayers()) this.activeGame.remove();
-         this.activeGame = null;
-      }
+      if (this.activeGame) gameManager.requestLeaveGame(this);
 
       // delete client
       delete clients[this.clientId];
