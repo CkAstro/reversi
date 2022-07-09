@@ -1,4 +1,5 @@
 import Node from './node.js';
+import logger from '../logger.js';
 'use strict';
 
 class GameState {
@@ -108,7 +109,7 @@ class GameState {
             count.white++;
          }
       }
-      console.log('Game over. Final count:', count);
+      logger('Game over. Final count:', count);
       if (count.black > count.white) {
          return 'black';
       } else if (count.black < count.white) {

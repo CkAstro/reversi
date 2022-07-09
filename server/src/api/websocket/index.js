@@ -1,6 +1,7 @@
 import { WebSocketServer } from 'ws';
 import { Client, clients } from './clients.js';
 import messageHandler from './messagehandler.js';
+import logger from '../../utils/logger.js';
 'use strict';
 
 // on connection, clreate a new client object
@@ -26,7 +27,7 @@ const createWebSocket = expressServer => {
       const newClient = new Client({clientIp: clientIp, socket: connection});
       connection.clientId = newClient.clientId;
       clients[newClient.clientId] = newClient;
-      console.log(`new client connected: ${newClient.clientId}`);
+      logger(`new client connected: ${newClient.clientId}`);
 
       // send handshake, assign client their Id
       newClient.send('handshake', {clientId: newClient.clientId});
@@ -34,7 +35,7 @@ const createWebSocket = expressServer => {
       // parse incoming client message and send to handler
       connection.on('message', message => {
          const parsedMessage = JSON.parse(message);
-         console.log('received over socket:', parsedMessage);
+         logger('received over socket:', parsedMessage);
          messageHandler.handleMessage(parsedMessage);
       });
 
@@ -46,7 +47,7 @@ const createWebSocket = expressServer => {
             client.opponent.send('errorMessage', {errorText: `Your opponent ${client.playerId} has disconnected.`})
          }
          client.remove();
-         console.log(`connection closed with client ${clientId}`);
+         logger(`connection closed with client ${clientId}`);
       });
    });
    return wsServer

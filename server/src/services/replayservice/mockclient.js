@@ -1,4 +1,5 @@
 import { clients } from '../../api/websocket/clients.js';
+import logger from '../../utils/logger.js';
 'use strict';
 
 class MockClient {
@@ -23,7 +24,7 @@ class MockClient {
             this.activeGame[this.playerColor] = null;
             if (this.opponent && this.opponent.opponent) this.opponent.opponent = null;
          } else {
-            console.log(`attempting to remove mock client ${this.clientId} from game, but no player color is set`);
+            logger(`attempting to remove mock client ${this.clientId} from game, but no player color is set`);
          }
          // remove game
          if (!this.activeGame.hasPlayers()) this.activeGame.remove();

@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 import { dbUrl } from '../config/index.js';
+import logger from '../utils/logger.js';
 'use strict';
 
 // connect to DB
-console.log('connecting to', dbUrl);
+logger('connecting to', dbUrl);
 mongoose.connect(dbUrl)
-   .then(result => console.log('connected to MongoDB'))
-   .catch(error => console.log('error connecting to MongoDB:', error.message));
+   .then(result => logger('connected to MongoDB'))
+   .catch(error => logger('error connecting to MongoDB:', error.message));
 
 // define CompletedGame
 const completedGameSchema = new mongoose.Schema({

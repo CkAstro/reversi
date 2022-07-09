@@ -8,6 +8,7 @@ import replayService from './services/replayservice/index.js';
 import createWebSocket from './api/websocket/index.js';
 import { clients } from './api/websocket/clients.js';
 import messageHandler from './api/websocket/messagehandler.js';
+import logger from './utils/logger.js';
 
 import { PORT } from './config/index.js';
 import API from './api/index.js';
@@ -32,7 +33,7 @@ const requestLogger = (request, response, next) => {
       path: request.path,
       body: request.body,
    }
-   console.log('received api call:', message);
+   logger('received api call:', message);
    next();
 }
 app.use(requestLogger);
@@ -53,7 +54,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint);
 
 // ----- listen ----- //
-const server = app.listen(PORT, () => console.log(`DataVis server running on port ${PORT}`));
+const server = app.listen(PORT, () => logger(`DataVis server running on port ${PORT}`));
 
 // ----- websocket ----- //
 const wsServer = createWebSocket(server);

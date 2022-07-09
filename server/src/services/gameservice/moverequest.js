@@ -1,6 +1,7 @@
 import { clients } from '../../api/websocket/clients.js';
 import { updateClientGameList } from './utils.js';
 import gameManager from './gamemanager.js';
+import logger from '../../utils/logger.js';
 'use strict';
 
 const handleMoveRequest = ({ clientId, data }, mock=false) => {
@@ -13,12 +14,12 @@ const handleMoveRequest = ({ clientId, data }, mock=false) => {
    const turn = gameState.turn;
 
    if (mock && game.matchType !== 'replay') {
-      return console.log(`mock move request but game ${game.gameId} is a live game.`);
+      return logger(`mock move request but game ${game.gameId} is a live game.`);
    }
 
    // verify player can move
    if (activePlayer !== client.playerColor && !mock) {
-      return console.log(`illegal move; player ${client.playerId} attempted to move while it is not their turn`);
+      return logger(`illegal move; player ${client.playerId} attempted to move while it is not their turn`);
    }
 
    // skip if necessary
@@ -44,7 +45,7 @@ const handleMoveRequest = ({ clientId, data }, mock=false) => {
       if (game.gameOver) gameManager.recordGame(game);
       updateClientGameList();
    } else {
-      // console.log('could not place');
+      // logger('could not place');
    }
 }
 

@@ -5,6 +5,7 @@ import handleNewGameRequest from '../gameservice/newgamerequest.js';
 import handleMoveRequest from '../gameservice/moverequest.js';
 import { replayCount } from '../../config/index.js';
 import { clients } from '../../api/websocket/clients.js';
+import logger from '../../utils/logger.js';
 'use strict';
 // goal here is to always have a replay going; chosen from completed games
 // mainly allows recruiters to test the observe function...
@@ -70,7 +71,7 @@ const init = async () => {
       initMockMatch(i);
    }
 
-   return console.log(`replay service initialized with n=${replayCount} replays`);
+   return logger(`replay service initialized with n=${replayCount} replays`);
 }
 
 export default { init };

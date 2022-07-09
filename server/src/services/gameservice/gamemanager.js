@@ -1,5 +1,6 @@
 import CompletedGame from '../../models/completedgame.js';
 import Game from './game.js';
+import logger from '../../utils/logger.js';
 'use strict';
 
 class GameManager {
@@ -39,12 +40,12 @@ class GameManager {
    requestNewGame(client, isMock=false) {
       if (!client || !client.clientId ) throw new Error('client is not valid for new game');
       if (!client.playerId) return client.send('errorMessage', {errorText: 'Please select a username before starting a new game.'});
-      if (client.activeGame) return console.log('player attempted to start new game while in active game', client);
+      if (client.activeGame) return logger('player attempted to start new game while in active game', client);
 
       const matchType = isMock ? 'replay' : 'live';
       const newGame = this.createNewGame(client, matchType);
 
-      console.log(`added player ${client.playerId} (${client.clientId}) to new game ${newGame.gameId}`);
+      logger(`added player ${client.playerId} (${client.clientId}) to new game ${newGame.gameId}`);
 
       // initialize game
       newGame.init();
@@ -54,7 +55,7 @@ class GameManager {
    requestJoinGame(client, opponent, gameId) {
       if (!client || !client.clientId ) throw new Error('client is not valid for new game');
       if (!client.playerId) return client.send('errorMessage', {errorText: 'Please select a username before joining a game.'});
-      if (client.activeGame) return console.log('player attempted to join game while in active game', client);
+      if (client.activeGame) return logger('player attempted to join game while in active game', client);
 
       // opponent requested ?
       if (opponent && opponent.opponent) return client.send('errorMessage', {errorText: `attempted to rejoin game with ${opponent.playerId}, but they are already in a game.`});
@@ -67,11 +68,11 @@ class GameManager {
       ;
 
       // make sure game exists
-      if (!game) return console.log(`player ${client.playerId} (${client.clientId}) attempted to join game ${gameId}, but it does not exist`);
+      if (!game) return logger(`player ${client.playerId} (${client.clientId}) attempted to join game ${gameId}, but it does not exist`);
 
       // verify single empty spot
-      if (game.black && game.white) return console.log(`player ${client.playerId} (${client.clientId}) attempted to join active game ${gameId}, but it is full`);
-      if (!game.black && !game.white) return console.log(`player ${client.playerId} (${client.clientId}) attempted to join active game ${gameId}, but it is empty`);
+      if (game.black && game.white) return logger(`player ${client.playerId} (${client.clientId}) attempted to join active game ${gameId}, but it is full`);
+      if (!game.black && !game.white) return logger(`player ${client.playerId} (${client.clientId}) attempted to join active game ${gameId}, but it is empty`);
 
       // add player to game and set opponents
       if (game.black) {
@@ -92,7 +93,7 @@ class GameManager {
       client.opponent.opponent = client;
 
       // log addition
-      console.log(`added player ${client.playerId} (${client.clientId}) to existing game ${gameId}`);
+      logger(`added player ${client.playerId} (${client.clientId}) to existing game ${gameId}`);
 
       // init game
       game.init();
@@ -116,7 +117,7 @@ class GameManager {
    // handle leave game request
    requestLeaveGame(client) {
       if (!client || !client.clientId ) throw new Error('client is not valid for new game');
-      if (!client.activeGame) return console.log(`client ${client.clientId} attempted to leave game, but they are not in a game`);
+      if (!client.activeGame) return logger(`client ${client.clientId} attempted to leave game, but they are not in a game`);
 
       const activeGame = client.activeGame;
       activeGame.removeClient(client);
@@ -125,7 +126,7 @@ class GameManager {
 
    // handle remove game
    _requestDeleteGame(gameToRemove) {
-      if (gameToRemove.hasPlayers()) return console.log(`server attempted to remove game ${gameToRemove.gameId}, but players are still present`);
+      if (gameToRemove.hasPlayers()) return logger(`server attempted to remove game ${gameToRemove.gameId}, but players are still present`);
       gameToRemove.removeAllClients();
       this._activeGames = this._activeGames.filter(game => game.gameId !== gameToRemove.gameId);
       if (gameToRemove.gameOver) {
@@ -151,7 +152,7 @@ class GameManager {
       });
 
       gameToSave.save().then(result => {
-         console.log(`game ${game.gameId} successfully saved to database`);
+         logger(`game ${game.gameId} successfully saved to database`);
       });
 
       this._requestDeleteGame(game);

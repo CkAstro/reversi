@@ -1,3 +1,4 @@
+import logger from '../../utils/logger.js';
 'use strict';
 
 // listen for messages from client and handle them. used with
@@ -15,7 +16,7 @@ class MessageHandler {
       if (this.listeners[message.type]) {
          this.listeners[message.type](message);
       } else {
-         console.log(`ERROR: received '${message.type}' message from client ${message.client}, but no listener is available`);
+         logger(`ERROR: received '${message.type}' message from client ${message.client}, but no listener is available`);
       }
    }
 }

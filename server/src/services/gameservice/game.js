@@ -1,4 +1,5 @@
 import GameState from '../../utils/gamestate/index.js';
+import logger from '../../utils/logger.js';
 'use strict';
 
 class Game {
@@ -108,7 +109,7 @@ class Game {
          black: this.black.playerId,
          white: this.white.playerId,
       });
-      console.log(`client ${client.clientId} now observing game ${this.gameId}`);
+      logger(`client ${client.clientId} now observing game ${this.gameId}`);
 
       // wait for client page to load before sending update
       setTimeout(() => this.sendGameUpdate(client), 100);
