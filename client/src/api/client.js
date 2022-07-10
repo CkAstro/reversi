@@ -26,9 +26,12 @@ class Client {
 
    init() {
       if (this.isInit) return;
-      const WS_URL = window.location.host.includes('localhost') ? 
-         'ws://localhost:3003' :
-         'wss://reversi.chriskolb.dev' ;
+      const WS_URL = window.location.host.includes('localhost')
+         ? 'ws://localhost:3003' 
+         : (window.location.host.includes('192')
+            ? 'ws://192.168.3.105:3003'
+            : 'wss://reversi.chriskolb.dev')
+      ;
       this.socket = new WebSocket(WS_URL);
       this.socket.onopen = () => console.log('client connected to server');
       this.socket.onmessage = message => {

@@ -7,10 +7,11 @@ const GameInfoArea = () => {
    const gameTextHeader = gameInfo.opponent.playerId ? <p>Game in progress</p> : <p>Waiting on opponent to join</p>
 
    const gameInfoText = () => {
-      const blackPlayer = gameInfo.black || 'n/a';
-      const whitePlayer = gameInfo.white || 'n/a';
+      const na = 'n/a';
+      const blackPlayer = gameInfo.black || na;
+      const whitePlayer = gameInfo.white || na;
       return <>
-         <p>{blackPlayer ? `Black: ${blackPlayer}`: null}</p>
+         <p>{blackPlayer ? `Black: ${blackPlayer === na && whitePlayer === na ? 'you!' : blackPlayer}`: null}</p>
          <p>{whitePlayer ? `White: ${whitePlayer}`: null}</p>
       </>;
    }

@@ -27,8 +27,10 @@ const Toolbar = () => {
    return (
       <div className={style.toolbarArea}>
          <p>Toolbar</p>
-         <InfoContainer/>
-         <GameHistory recentGames={recentGames} playerGames={playerGames}/>
+         <div className={style.toolbarFlexContainer}>
+            <InfoContainer/>
+            <GameHistory recentGames={recentGames} playerGames={playerGames}/>
+         </div>
       </div>
    );
 

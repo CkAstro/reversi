@@ -1,67 +1,52 @@
 
 .gameSelectContainer {
-   display: grid;
-   grid-template-columns: 1fr;
-   grid-row-gap: 20px;
-   width: 100%;
-   /* height: 100%; */
-   float: left;
+   display: flex;
+   flex-direction: column;
+   gap: var(--main-spacing);
+   width: var(--display-width);
+   align-items: center;
 }
 
 .gameSelect {
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   grid-gap: 20px;
-   float: left;
-   grid-column-start: 1;
-   grid-column-end: 2;
+   display: flex;
+   flex-wrap: wrap;
+   gap: var(--main-spacing);
+   width: var(--display-width);
+
+   --gameSize: calc( (var(--display-width) - 2 * var(--main-spacing)) / 3);
 }
 
-.gameSelect>p {
-   grid-column-start: 1;
-   grid-column-end: 4;
-   text-align: center;
-   margin: 0px;
-   padding: 0px;
+@media only screen and (max-width: 700px) {
+   .gameSelect{
+      --gameSize: calc( (var(--display-width) - var(--main-spacing)) / 2);
+   }
 }
 
-.gameSelect>.game {
-   width: 200px;
-   height: 200px;
-   margin: 0px;
+.gameSelect > .game {
+   width: var(--gameSize);
+   height: var(--gameSize);
    box-sizing: border-box;
-   padding: 20px;
-   border: 3px solid var(--ncsu-dark-gray);
+   padding: var(--main-padding);
+   border: 3px solid var(--color-black);
    border-radius: 20px;
+
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   text-align: center;
    font-size: 30px;
    font-weight: bold;
    cursor: pointer;
    position: relative;
-}
-
-.game p {
-   justify-self: center;
    text-align: center;
-   /* margin: 0px; */
-   /* white-space: nowrap; */
-   /* color: white; */
 }
 
-.game>.replayMatch {
+.game > .liveMatch,
+.game > .replayMatch {
    font-size: 18px;
-   color: var(--ncsu-light-red);
    position: absolute;
    bottom: -6px;
 }
 
-.game>.liveMatch {
-   font-size: 18px;
-   color: green;
-   position: absolute;
-   bottom: -6px;
-}
+.game > .liveMatch { color: green; }
+.game > .replayMatch { color: var(--ncsu-light-red); }

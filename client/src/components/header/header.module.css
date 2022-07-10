@@ -1,5 +1,9 @@
 
 /* ----- index.js ----- */
+.headerContainer {
+   flex: 0;
+}
+
 .header h1 {
    margin: 0px;
    padding: 0px;

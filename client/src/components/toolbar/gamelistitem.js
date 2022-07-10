@@ -1,23 +1,26 @@
 import GameBoard from '../gameboard';
+import GamePiece from '../gameboard/gamepiece';
 import style from './toolbar.module.css';
 
 const GameListItem = ({ gameInfo, onClick, isActive }) => {
-   const blackPiece = <span className='black gamePiece'/>
-   const whitePiece = <span className='white gamePiece'/>
+   const blackPiece = <GamePiece mini inline value='black'/>;
+   const whitePiece = <GamePiece mini inline value='white'/>;
 
    return (
       <div className={`noselect ${style.gameListItem} ${isActive ? style.active : ''}`} onClick={onClick}>
-         <p>{blackPiece} {gameInfo.black}</p>
-         <p>{whitePiece} {gameInfo.white}</p>
-         <div>
+         <div className={style.gameListItemHeader}>
+            <div>{blackPiece} {gameInfo.black}</div>
+            <div>{whitePiece} {gameInfo.white}</div>
+         </div>
+         <div className={style.gameListItemBody}>
+            <GameBoard gameState={gameInfo.gameState} mini/>
             <div className={style.info}>
-               <p>Score: {gameInfo.score}</p>
-               <p>{gameInfo.winner} wins</p>
-               <p>Turns: {gameInfo.turn}</p>
-               <p className={style.viewMatch}>View Match</p>
+               <div>Score: {gameInfo.score}</div>
+               <div>{gameInfo.winner} wins</div>
+               <div>Turns: {gameInfo.turn}</div>
+               <div className={style.viewMatch}>View Match</div>
             </div>
          </div>
-         <GameBoard gameState={gameInfo.gameState}/>
       </div>
    );
 }

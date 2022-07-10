@@ -1,0 +1,5 @@
+
+.gameArea {
+   width: var(--display-width);
+   box-sizing: border-box;
+}

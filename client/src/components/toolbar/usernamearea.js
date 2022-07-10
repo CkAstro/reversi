@@ -3,30 +3,26 @@ import client from '../../api/client';
 import style from './toolbar.module.css';
 
 const UsernameArea = ({ playerId }) => {
-   const [ usernameInput, setUsernameInput ] = useState('username...');
-   const [ isActive, setIsActive ] = useState('');
+   const defaultInput = 'username...';
+   const [ usernameInput, setUsernameInput ] = useState(defaultInput);
 
    const requestPlayerId = event => {
       event.preventDefault();
-      if (usernameInput === 'username...') return;
+      if (usernameInput === defaultInput) return;
       client.send('playerIdRequest', {playerId: usernameInput});
-      setIsActive('');
    }
 
    const handleInput = event => setUsernameInput(event.target.value);
-   const handleFocus = event => {
-      setIsActive('active');
-      event.target.select();
-   }
+   const handleFocus = event => event.target.select();
 
    const playerIdRequestForm = (
-      <form onSubmit={requestPlayerId}>
-         <input className={isActive ? style.active : null}
+      <form className={style.idRequest} onSubmit={requestPlayerId}>
+         <input className={usernameInput === defaultInput ? null : style.active}
             onChange={handleInput}
             onFocus={handleFocus}
             value={usernameInput}
          />
-         <button type='submit'>submit</button>
+         <button type='submit'>Submit</button>
       </form>
    );
 

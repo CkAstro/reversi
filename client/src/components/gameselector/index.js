@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import API from '../../api';
 import client from '../../api/client';
 import GameObject from './gameobject';
-import './index.css';
+import style from './gameselector.module.css';
 
 const GameSelector = () => {
    const [ currentGames, setCurrentGames ] = useState([]);
@@ -52,14 +52,14 @@ const GameSelector = () => {
    }
 
    return (
-      <div className='gameSelectContainer'>
-         <div className='gameSelect'>
-            <p>Join a Game</p>
+      <div className={style.gameSelectContainer}>
+         <p>Join a Game</p>
+         <div className={style.gameSelect}>
             {newGame()}
             {waitingGames()}
          </div>
-         <div className='gameSelect'>
-            <p>Observe Live Games</p>
+         <p>Observe Live Games</p>
+         <div className={style.gameSelect}>
             {liveGames()}
          </div>
       </div>

@@ -1,18 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body, html {
    margin: 0px;
    padding: 0px;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
+   font-family: 'Roboto', sans-serif;
+   color: var(--color-black);
+   width: 100vw;
+   height: 100vh;
+   text-decoration: none;
+   overflow-x: hidden;
 }
 
 /* ----- globals ----- */
 
 :root {
+   --color-black: #1e1e1e;
+
    --ncsu-dark-red: #900;
    --ncsu-light-red: #c00;
    --ncsu-dark-gray: #333;
    --ncsu-mid-gray: #555;
    --ncsu-light-gray: #cacaca;
+
+   --content-max-width: 1000px;
+   --content-fallback-width: 700px;
+
    --main-spacing: 20px;
    --main-padding: 20px;
 }
@@ -41,33 +55,50 @@ body, html {
    outline: solid #f00 1px !important;
 } */
 
-
-.mainContainer {
-   width: 1000px;
-   margin: auto;
-   height: 100%;
-   box-sizing: border-box;
+.mainLayout {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
 }
 
-.mainLayout {
-   display: grid;
-   grid-template-rows: auto 1fr;
-   height: 100vh;
-   font-family: 'Roboto', sans-serif;
-   color: var(--ncsu-dark-gray);
+.mainContainer {
+   width: var(--content-max-width);
+   margin: 0 auto;
+   flex: 1;
 }
 
 .reversiContainer {
-   display: grid;
-   grid-template-columns: 9fr 4fr;
+   display: flex;
+   flex-wrap: wrap;
    height: 100%;
-   grid-gap: var(--main-spacing);
+   gap: var(--main-spacing);
    padding: var(--main-spacing) 0px; /* main spacing, still for grid gap */
    box-sizing: border-box;
+
+   --display-default-width: calc( 9 / 13 * (var(--content-max-width) - var(--main-spacing)));
+   --toolbar-default-width: calc( 4 / 13 * (var(--content-max-width) - var(--main-spacing)));
+   --display-width: var(--display-default-width);
+   --toolbar-width: var(--toolbar-default-width);
 }
 
-.reversiContainer .toolbarArea {
-   background: var(--ncsu-light-gray);
-   border-radius: var(--main-spacing);
-   padding: var(--main-padding);
+@media only screen and (max-width: 1000px) {
+   .mainContainer { width: var(--content-fallback-width); }
+   .reversiContainer {
+      --display-width: var(--content-fallback-width);
+      --toolbar-width: var(--content-fallback-width);
+      width: var(--content-fallback-width);
+      flex-direction: column-reverse;
+   }
+}
+
+@media only screen and (max-width: 700px) {
+   .mainContainer {
+      --content-fallback-width: min(100vw, 500px);
+      width: var(--content-fallback-width);
+   }
+   .reversiContainer {
+      --display-width: var(--content-fallback-width);
+      --toolbar-width: var(--content-fallback-width);
+      width: var(--content-fallback-width);
+   }
 }

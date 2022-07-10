@@ -1,12 +1,12 @@
 import ScaleText from 'react-scale-text';
-import './index.css';
+import style from './gameselector.module.css';
 
 const GameObject = ({ black, white, matchType, onClick }) => {
-   if (!(black || white)) return <div className='game' onClick={onClick}>
+   if (!(black || white)) return <div className={style.game} onClick={onClick}>
       <p>Start New Game</p>
    </div>;
 
-   const gameClass = `${matchType}Match`;
+   const gameClass = matchType === 'live' ? style.liveMatch : style.replayMatch;
    const liveGame = black && white;
 
    const firstText = black ? black : white;
@@ -22,7 +22,7 @@ const GameObject = ({ black, white, matchType, onClick }) => {
    }
 
    return (
-      <div className='game' onClick={onClick}>
+      <div className={style.game} onClick={onClick}>
          <ScaleText widthOnly={true} maxFontSize={32}>
             <p style={textAdjust}>{firstText}</p>
          </ScaleText>

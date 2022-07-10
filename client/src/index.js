@@ -14,10 +14,10 @@ const Reversi = () => {
    
    return (
       <div className='reversiContainer'>
-         <GameInfoProvider>
-            <Display/>
-            <Toolbar/>
-         </GameInfoProvider>
+            <GameInfoProvider>
+               <Display/>
+               <Toolbar/>
+            </GameInfoProvider>
       </div>
    );
 }
