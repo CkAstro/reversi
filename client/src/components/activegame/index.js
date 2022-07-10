@@ -13,23 +13,21 @@ const ActiveGame = () => {
    const [ endModalActive, setEndModalActive ] = useState(false);
    const { gameInfo, handleInfoUpdate, resetGameInfo } = useGameInfo();
 
-   const [ lastGameState, setLastGameState ] = useState(Array(64).fill(null));
-   const [ renderState, setRenderState ] = useState(Array(64).fill(null));
+   // record most recent move so we can trigger 
+   const [ lastGameState, setLastGameState ] = useState(null);
+   const [ lastMove, setLastMove ] = useState(null);
    useEffect(() => {
-      const newInteract = Array(64).fill(null);
+      if (gameInfo.turn === null) return;
+      if (!lastGameState) return setLastGameState(Array(64).fill(null));
+
+      const { gameState } = gameInfo;
       for (let i=0; i<64; i++) {
-         if (renderState[i] !== null) {
-            newInteract[i] = 'flip';
-         } else if (lastGameState[i] === null && gameInfo.gameState[i] !== null) {
-            newInteract[i] = 'place flip';
-         } else if (lastGameState[i] !== null && gameInfo.gameState[i] !== lastGameState[i]) {
-            newInteract[i] = 'flip';
-         } else {
-            newInteract[i] = null;
+         if (gameState[i] && !lastGameState[i]) {
+            setLastMove(i);
+            break;
          }
       }
-      setRenderState(newInteract);
-      setLastGameState(gameInfo.gameState.slice());
+      setLastGameState(gameState.slice());
    }, [gameInfo.gameState]);
 
    // listen for game update (player makes a move, etc)
@@ -72,7 +70,7 @@ const ActiveGame = () => {
       />
       <div className={style.activeGame}>
          <OpponentDisplay/>
-         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} renderState={renderState}/>
+         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} lastMove={lastMove}/>
          <MoveDisplay/>
       </div>
    </>);

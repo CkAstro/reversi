@@ -1,0 +1,180 @@
+
+/* ----- main game board ----- */
+.gameBoard {
+   --gameSquare-border: 1px;
+   --gameSquare-size: 40px;
+   --gamePiece-margin: 5px;
+
+   --background-black-bottom: linear-gradient(rgb(50,50,50), rgb(0,0,0));
+   --background-black-top: linear-gradient(rgb(25, 25, 25), rgb(100, 100, 100));
+   --background-white-bottom: linear-gradient(rgb(125, 125, 125), rgb(255, 255, 255));
+   --background-white-top: linear-gradient(rgb(255, 255, 255), rgb(175, 175, 175));
+
+                                                                      
+   display: flex;
+   flex-wrap: wrap;
+   width: calc(8 * (var(--gameSquare-size) + var(--gameSquare-border)) - var(--gameSquare-border));
+   border: 2px solid var(--color-black);
+   background: var(--color-black);
+   gap: var(--gameSquare-border);
+   box-shadow: 0 0 10px var(--color-black);
+}
+
+/* NOTE: game square border given by --gameSquare-border in .gameBoard */
+.gameSquare {
+   position: relative;
+   width: var(--gameSquare-size);
+   height: var(--gameSquare-size);
+   background: green;
+}
+
+.gameSquare.placed {
+   box-shadow: inset 0 0 10px yellow;
+   -webkit-animation: 2s linear 0s 1 glow;
+      -moz-animation: 2s linear 0s 1 glow;
+           animation: 2s linear 0s 1 glow;
+
+   -webkit-animation-fill-mode: forwards;
+      -moz-animation-fill-mode: forwards;
+           animation-fill-mode: forwards;
+}
+
+@keyframes glow {
+   from { box-shadow: inset 0 0 10px #dada44; }
+   to { box-shadow: inset 0 0 10px rgba(218, 218, 68, 0); }
+}
+
+
+/* ----- game piece ----- */
+.gamePiece {
+   position: absolute;
+   top: var(--gamePiece-margin);
+   left: var(--gamePiece-margin);
+   right: var(--gamePiece-margin);
+   bottom: var(--gamePiece-margin);
+   content: '';
+   border-radius: 50%;
+}
+
+/* -- black piece -- */
+.gamePiece.black {
+   --this-bg: var(--background-black-bottom);
+   --that-bg: var(--background-white-bottom);
+   --this-scale: scale(1,-1);
+   --that-scale: scale(1, 1);
+
+   box-shadow: 0 0 10px #333;
+   background: var(--this-bg);
+   transform: var(--this-scale);
+   transition: all 0.5s;
+}
+
+/* -- black piece topper -- */
+.gameBoard:not(.mini) .gamePiece.black::after,
+.gamePiece.black:not(.mini)::after {
+   --this-bg: var(--background-black-top);
+   --that-bg: var(--background-white-top);
+   --this-scale: scale(1, 1);
+   --that-scale: scale(1,-1);
+
+   position: absolute;
+   top: 3px;
+   left: 3px;
+   right: 3px;
+   bottom: 3px;
+   content: '';
+   box-shadow: none;
+   border-radius: 50%;
+   background: var(--background-black-top);
+}
+
+/* -- white piece -- */
+.gamePiece.white {
+   --this-bg: var(--background-white-bottom);
+   --that-bg: var(--background-black-bottom);
+   --this-scale: scale(1, 1);
+   --that-scale: scale(1,-1);
+
+   box-shadow: 0 0 10px #333;
+   background: var(--this-bg);
+   transform: var(--this-scale);
+   transition: all 0.5s;
+}
+
+/* -- white piece topper -- */
+.gameBoard:not(.mini) .gamePiece.white::after,
+.gamePiece.white:not(.mini)::after {
+   --this-bg: var(--background-white-top);
+   --that-bg: var(--background-black-top);
+   --this-scale: scale(1, 1);
+   --that-scale: scale(1,-1);
+
+   position: absolute;
+   top: 3px;
+   left: 3px;
+   right: 3px;
+   bottom: 3px;
+   content: '';
+   box-shadow: none;
+   border-radius: 50%;
+   background: var(--background-white-top);
+}
+
+
+/* ----- mini version ----- */
+.gameBoard.mini {
+   --gameSquare-size: 14px;
+   --gamePiece-margin: 2px;
+   border: 1px solid var(--color-black);
+   box-shadow: none;
+}
+
+.gamePiece.mini.inline {
+   --gameSquare-size: 14px;
+   --gamePiece-margin: 2px;
+   position: relative;
+   display: inline-block;
+   margin: var(--gamePiece-margin);
+   margin-left: 0;
+   width: calc(var(--gameSquare-size) - 2 * var(--gamePiece-margin));
+   height: calc(var(--gameSquare-size) - 2 * var(--gamePiece-margin));
+}
+
+.gameBoard.mini .gamePiece,
+.gamePiece.mini { box-shadow: none; }
+
+.gameBoard.mini .gamePiece.black,
+.gamePiece.mini.black { background: black; }
+
+.gameBoard.mini .gamePiece.white,
+.gamePiece.mini.white { background: white; }
+
+
+/* ----- animations ----- */
+/* uncomment the below to turn on and override 'transition' flipping
+/* NOTE: this needs some adjustment; 
+      currently flips placed piece without flipping pieces
+      that should flip (so opposite behavior...)
+*/
+
+/*
+.gamePiece.black,
+.gamePiece.white,
+.gamePiece.black::after,
+.gamePiece.white::after {
+   -webkit-animation: 0.5s linear 0s 1 flipMe;
+      -moz-animation: 0.5s linear 0s 1 flipMe;
+           animation: 0.5s linear 0s 1 flipMe;
+
+   -webkit-animation-fill-mode: forwards;
+      -moz-animation-fill-mode: forwards;
+           animation-fill-mode: forwards;
+}
+
+@keyframes flipMe {
+   from { transform: var(--that-scale); background: var(--that-bg); }
+   49% { transform: scale(1, 0); background: var(--that-bg); }
+   51% { transform: scale(1, 0); background: var(--this-bg); }
+   to { transform: var(--this-scale); background: var(--this-bg); }
+} 
+*/

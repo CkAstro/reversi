@@ -1,15 +1,14 @@
-import './index.css';
+import { memo } from 'react';
+import GamePiece from './gamepiece';
+import style from './gameboard.module.css';
 
-const GameSquare = ({ value, onClick, renderState }) => {
-   const gamePiece = `${value} gamePiece ${renderState}`;
-   const gameSquare = `gameSquare ${renderState}`;
+const GameSquare = ({ value, onClick, isPlaced, mini }) => {
+   if (!value) return <div onClick={onClick} className={style.gameSquare}/>;
 
-   return (
-      <div className={gameSquare} onClick={onClick}>
-         <div className={gamePiece}/>
-         <div className={`${gamePiece} top`}/>
-      </div>
-   );
+   return <div onClick={onClick} className={`${style.gameSquare} ${isPlaced ? style.placed : ''}`}>
+      {console.log('rendering square!')}
+      <GamePiece value={value} mini={mini}/>
+   </div>
 }
 
-export default GameSquare;
+export default memo(GameSquare);

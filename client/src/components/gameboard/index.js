@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import GameSquare from './gamesquare';
 import client from '../../api/client';
-import './index.css';
+import style from './gameboard.module.css';
 
-const GameBoard = ({ renderState, gameState, activeBoard }) => {
+const GameBoard = ({ lastMove, gameState, activeBoard, mini }) => {
    const requestMove = ind => {
       if (activeBoard) client.send('moveRequest', {move: ind});
    }
@@ -12,19 +13,20 @@ const GameBoard = ({ renderState, gameState, activeBoard }) => {
       return gameState.map((val, ind) => {
          return <GameSquare key={ind}
             value={val}
-            renderState={renderState ? renderState[ind] : null}
+            isPlaced={lastMove === ind}
             onClick={() => requestMove(ind)}
+            mini={mini}
          />
       });
    }
 
    return (
-      <div className='gameBoardContainer'>
-         <div className='gameBoard'>
+      <div className={`${style.gameBoardContainer}`}>
+         <div className={`${style.gameBoard} ${mini ? style.mini : ''}`}>
             {drawGameState()}
          </div>
       </div>
    );
 }
 
-export default GameBoard;
+export default memo(GameBoard);
