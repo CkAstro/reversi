@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import client from '../../api/client';
-import './index.css';
+import style from './toolbar.module.css';
 
 const UsernameArea = ({ playerId }) => {
    const [ usernameInput, setUsernameInput ] = useState('username...');
@@ -21,7 +21,7 @@ const UsernameArea = ({ playerId }) => {
 
    const playerIdRequestForm = (
       <form onSubmit={requestPlayerId}>
-         <input className={isActive}
+         <input className={isActive ? style.active : null}
             onChange={handleInput}
             onFocus={handleFocus}
             value={usernameInput}

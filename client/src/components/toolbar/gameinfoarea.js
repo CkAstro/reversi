@@ -1,5 +1,5 @@
 import { useGameInfo } from '../../contexts/gameinfo';
-import './index.css';
+import style from './toolbar.module.css';
 
 const GameInfoArea = () => {
    const { gameInfo } = useGameInfo();
@@ -16,7 +16,7 @@ const GameInfoArea = () => {
    }
 
    return (
-      <div className='gameText'>
+      <div className={style.gameText}>
          {gameTextHeader}
          {gameInfoText()}
       </div>

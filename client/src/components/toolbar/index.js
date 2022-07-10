@@ -4,7 +4,7 @@ import GameHistory from './gamehistory';
 import { useGameInfo } from '../../contexts/gameinfo';
 import API from '../../api';
 import client from '../../api/client';
-import './index.css';
+import style from './toolbar.module.css';
 
 const Toolbar = () => {
    const [ recentGames, setRecentGames ] = useState([]);
@@ -25,7 +25,7 @@ const Toolbar = () => {
 
 
    return (
-      <div className='toolbarArea'>
+      <div className={style.toolbarArea}>
          <p>Toolbar</p>
          <InfoContainer/>
          <GameHistory recentGames={recentGames} playerGames={playerGames}/>

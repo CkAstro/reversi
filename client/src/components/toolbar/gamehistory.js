@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import GameListItem from './gamelistitem';
-import './index.css';
+import style from './toolbar.module.css';
 
 const GameHistory = ({ recentGames, playerGames }) => {
    const [ isActive, setIsActive ] = useState(Array(20).fill(''));
@@ -19,16 +19,16 @@ const GameHistory = ({ recentGames, playerGames }) => {
    }
 
    const buttons = (
-      <div className='historySelectContainer'>
-         <div className={`historySelectButton noselect ${gameView === 'recent' ? 'active' : ''}`} 
+      <div className={style.historySelectContainer}>
+         <div className={`noselect ${style.historySelectButton} ${gameView === 'recent' ? style.active : ''}`} 
             onClick={() => setGameView('recent')}>Recent Games</div>
-         <div className={`historySelectButton noselect ${gameView === 'player' ? 'active' : ''}`} 
+         <div className={`noselect ${style.historySelectButton} ${gameView === 'player' ? style.active : ''}`} 
             onClick={() => setGameView('player')}>Player History</div>
       </div>
    );
 
    const buildGameList = games => {
-      if (games.length === 0) return <p className='unavailable'>Game history not available.</p>;
+      if (games.length === 0) return <p className={style.unavailable}>Game history not available.</p>;
 
       // reformat games before rendering a GameListItem
       return games.map((game, ind) => {
@@ -58,10 +58,10 @@ const GameHistory = ({ recentGames, playerGames }) => {
    }
 
    return (
-      <div className='gameHistory'>
+      <div className={style.gameHistory}>
          {buttons}
-         <div className='gameListContainer'>
-            <div className='gameList noscrollbar'>
+         <div className={style.gameListContainer}>
+            <div className={`noscrollbar ${style.gameList}`}>
                {buildGameList(gameView === 'recent' ? recentGames : playerGames)}
             </div>
          </div>

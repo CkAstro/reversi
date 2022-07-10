@@ -1,7 +1,7 @@
 import { useGameInfo } from '../../contexts/gameinfo';
 import GameInfoArea from './gameinfoarea';
 import UsernameArea from './usernamearea';
-import './index.css';
+import style from './toolbar.module.css';
 
 const InfoContainer = () => {
    const { gameInfo } = useGameInfo();
@@ -9,7 +9,7 @@ const InfoContainer = () => {
    const gameText = gameInfo.activeGame ? <GameInfoArea/> : <p>You are not currently in a game.</p>;
 
    return (
-      <div className='infoContainer'>
+      <div className={style.infoContainer}>
          <UsernameArea playerId={gameInfo.playerId}/>
          {gameInfo.playerId ? gameText : null}
       </div>

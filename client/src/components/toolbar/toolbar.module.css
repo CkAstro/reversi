@@ -1,7 +1,12 @@
 
 .toolbarArea {
+   width: var(--toolbar-width);
+   box-sizing: border-box;
    display: grid;
    grid-template-rows: auto auto 1fr;
+   background: var(--ncsu-light-gray);
+   border-radius: var(--main-spacing);
+   padding: var(--main-padding);
 }
 
 .toolbarArea>p:first-child{
