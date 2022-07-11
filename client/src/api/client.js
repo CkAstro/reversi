@@ -36,8 +36,8 @@ class Client {
       this.socket.onopen = () => console.log('client connected to server');
       this.socket.onmessage = message => {
          const parsedMessage = JSON.parse(message.data);
-         console.log('message from server:', parsedMessage);
          this.serverMessageHandler(parsedMessage);
+         // console.log('message from server:', parsedMessage);
       }
    }
    
@@ -62,7 +62,6 @@ class Client {
 
    // add a server listener
    addListener(type, updater) {
-      // if (!this.listeners[type]) this.listeners[type] = updater;
       this.listeners[type] = updater;
    }
 

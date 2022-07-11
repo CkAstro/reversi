@@ -27,6 +27,7 @@ const getPlayerGames = playerId => {
 }
 
 export default {
+   baseUrl,
    getActiveGames,
    getRecentGames,
    getPlayerGames

@@ -15,9 +15,8 @@ const GameOverMessage = () => {
    ;
 
    const handleResponse = response => {
-      const { opponent, activeGame } = gameInfo;
+      const { opponent } = gameInfo;
       if (response !== null) resetGameInfo();
-      // if (activeGame) client.send('leaveGameRequest', {status: true});
       if (response) client.send('newGameRequest', {opponent: opponent});
       closeModal();
    }

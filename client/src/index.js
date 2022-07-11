@@ -8,8 +8,7 @@ import Display from './components/display';
 import Toolbar from './components/toolbar';
 import client from './api/client';
 import api from './api';
-import Modal from './components/modal';
-import ServerMessage from './components/modal/servermessage';
+import Modal, { ServerMessage } from './components/modal';
 import './index.css';
 
 const Reversi = () => {
@@ -40,7 +39,7 @@ const Reversi = () => {
       // finally, request active games from server
       api.getActiveGames().then(games => setActiveGameList(games));
    }, []);
-   
+
    return (
       <div className='reversiContainer'>
          <Display/>

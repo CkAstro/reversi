@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useGameInfo } from '../../contexts/gameinfo';
 import { useModal } from '../../contexts/modal';
+import { SkipMessage, GameOverMessage } from '../modal';
 import client from '../../api/client';
 import GameBoard from '../gameboard';
 import BackButton from './backbutton';
 import MoveDisplay from './movedisplay';
 import OpponentDisplay from './opponentdisplay';
-import SkipMessage from '../modal/skipmessage';
-import GameOverMessage from '../modal/gameovermessage';
 import style from './activegame.module.css';
 
 const ActiveGame = () => {

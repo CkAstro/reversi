@@ -2,9 +2,11 @@ import ScaleText from 'react-scale-text';
 import style from './gameselector.module.css';
 
 const GameObject = ({ black, white, matchType, onClick }) => {
-   if (!(black || white)) return <div className={style.game} onClick={onClick}>
-      <p>Start New Game</p>
-   </div>;
+   if (!(black || white)) return (
+      <div className={style.game} onClick={onClick}>
+         <p>Start New Game</p>
+      </div>
+   );
 
    const gameClass = matchType === 'live' ? style.liveMatch : style.replayMatch;
    const liveGame = black && white;

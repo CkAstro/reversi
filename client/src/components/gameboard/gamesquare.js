@@ -5,9 +5,11 @@ import style from './gameboard.module.css';
 const GameSquare = ({ value, onClick, isPlaced, mini }) => {
    if (!value) return <div onClick={onClick} className={style.gameSquare}/>;
 
-   return <div onClick={onClick} className={`${style.gameSquare} ${isPlaced ? style.placed : ''}`}>
-      <GamePiece value={value} mini={mini}/>
-   </div>
+   return (
+      <div onClick={onClick} className={`${style.gameSquare} ${isPlaced ? style.placed : ''}`}>
+         <GamePiece value={value} mini={mini}/>
+      </div>
+   );
 }
 
 export default memo(GameSquare);

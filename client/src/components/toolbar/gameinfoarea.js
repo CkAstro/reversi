@@ -10,10 +10,10 @@ const GameInfoArea = () => {
       const na = 'n/a';
       const blackPlayer = gameInfo.black || na;
       const whitePlayer = gameInfo.white || na;
-      return <>
+      return (<>
          <p>{blackPlayer ? `Black: ${blackPlayer === na && whitePlayer === na ? 'you!' : blackPlayer}`: null}</p>
          <p>{whitePlayer ? `White: ${whitePlayer}`: null}</p>
-      </>;
+      </>);
    }
 
    return (
