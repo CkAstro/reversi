@@ -7,8 +7,6 @@ const buildGameList = games => games.map(game => {
       val === 'white' && whiteScore++;
    });
 
-   console.log('yo')
-
    return {
       gameId: game.gameId,
       gameState: game.finalState,
