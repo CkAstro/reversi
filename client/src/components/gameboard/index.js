@@ -8,22 +8,19 @@ const GameBoard = ({ lastMove, gameState, activeBoard, mini }) => {
       if (activeBoard) client.send('moveRequest', {move: ind});
    }
 
-   const drawGameState = () => {
-      if (!gameState) return;
-      return gameState.map((val, ind) => {
-         return <GameSquare key={ind}
-            value={val}
-            isPlaced={lastMove === ind}
-            onClick={() => requestMove(ind)}
-            mini={mini}
-         />
-      });
-   }
+   const drawGameState = gameState.map((val, ind) => (
+      <GameSquare key={ind}
+         value={val}
+         isPlaced={lastMove === ind}
+         onClick={() => requestMove(ind)}
+         mini={mini}
+      />
+   ));
 
    return (
       <div className={`${style.gameBoardContainer}`}>
          <div className={`${style.gameBoard} ${mini ? style.mini : ''}`}>
-            {drawGameState()}
+            {drawGameState}
          </div>
       </div>
    );
