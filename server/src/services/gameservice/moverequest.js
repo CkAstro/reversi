@@ -31,6 +31,7 @@ const handleMoveRequest = ({ clientId, data }, mock=false) => {
 
    // attempt to place piece
    if (gameState.placePiece(move, activePlayer)) {
+
       // record move and flip active player
       game.moveHistory = game.moveHistory.concat({ player: activePlayer, move: move });
       game.activePlayer = activePlayer === 'black' ? 'white' : 'black';
@@ -41,11 +42,8 @@ const handleMoveRequest = ({ clientId, data }, mock=false) => {
 
       // update playersa
       game.sendGameUpdate();
-      // if (game.gameOver) handleCompletedGame(game)
       if (game.gameOver) gameManager.recordGame(game);
       updateClientGameList();
-   } else {
-      // logger('could not place');
    }
 }
 

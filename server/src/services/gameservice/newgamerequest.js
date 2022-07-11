@@ -10,6 +10,7 @@ const handleNewGameRequest = ({ clientId, data }, isMock=false) => {
    // check for opponent
    if (data.opponent && data.opponent.clientId) {
       const opponent = clients[data.opponent.clientId];
+      if (!opponent) return client.send('errorMessage', {errorText: 'Opponent has disconnected. You have been returned to the lobby'});
       if (opponent.activeGame) return handleJoinGameRequest({ clientId, data });
    }
 

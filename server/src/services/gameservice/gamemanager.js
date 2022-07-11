@@ -126,7 +126,6 @@ class GameManager {
 
    // handle remove game
    _requestDeleteGame(gameToRemove) {
-      if (gameToRemove.hasPlayers()) return logger(`server attempted to remove game ${gameToRemove.gameId}, but players are still present`);
       gameToRemove.removeAllClients();
       this._activeGames = this._activeGames.filter(game => game.gameId !== gameToRemove.gameId);
       if (gameToRemove.gameOver) {
