@@ -1,14 +1,14 @@
-import { useState } from 'react';
 import { useGameInfo } from '../../contexts/gameinfo';
 import GameSelector from '../gameselector';
 import ActiveGame from '../activegame';
 import client from '../../api/client';
 import Modal from '../modal';
+import { useModal } from '../../contexts/modal';
 import style from './display.module.css';
+import ServerMessage from '../modal/servermessage';
 
 const Display = () => {
-   const [ modalActive, setModalActive ] = useState(false);
-   const [ modalContent, setModalContent ] = useState('');
+   const { setModalContent } = useModal();
    const { gameInfo, handleInfoUpdate } = useGameInfo();
 
    // listen for game join triggers
@@ -20,14 +20,11 @@ const Display = () => {
    ;
 
    client.addListener('errorMessage', data => {
-      setModalContent(<p>{data.errorText}</p>);
-      setModalActive(true);
+      setModalContent(<ServerMessage message={data.errorText}/>);
    });
 
-   const closeModal = () => setModalActive(false);
-
    return (<>
-      <Modal.ServerMessage closeModal={closeModal} isActive={modalActive}>{modalContent}</Modal.ServerMessage>
+      <Modal/>
       <div className={style.gameArea}>
          {display}
       </div>

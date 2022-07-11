@@ -6,6 +6,7 @@ import Toolbar from './components/toolbar';
 import client from './api/client';
 import { GameInfoProvider } from './contexts/gameinfo';
 import './index.css';
+import { ModalProvider } from './contexts/modal';
 
 const Reversi = () => {
    useEffect(() => {
@@ -15,8 +16,10 @@ const Reversi = () => {
    return (
       <div className='reversiContainer'>
             <GameInfoProvider>
-               <Display/>
-               <Toolbar/>
+               <ModalProvider>
+                  <Display/>
+                  <Toolbar/>
+               </ModalProvider>
             </GameInfoProvider>
       </div>
    );
