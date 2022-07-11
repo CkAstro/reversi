@@ -1,6 +1,6 @@
 import GameBoard from '../gameboard';
 import GamePiece from '../gameboard/gamepiece';
-import style from './toolbar.module.css';
+import style from './gamelistitem.module.css';
 
 const GameListItem = ({ gameInfo, onClick, isActive }) => {
    const blackPiece = <GamePiece mini inline value='black'/>;

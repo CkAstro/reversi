@@ -1,0 +1,47 @@
+
+/* ----- recent/player selection buttons ----- */
+.historySelectContainer {
+   border-bottom: 1px solid #8a8a8a; 
+}
+
+.historySelectButton {
+   display: inline-block;
+   padding: 6px 12px;
+   background: #bababa;
+   font-size: 13px;
+   font-weight: bold;
+   transition: all 0.2s;
+}
+
+.historySelectButton.active {
+   background: #8a8a8a;
+}
+
+.historySelectButton:not(.active):hover {
+   background: #aaaaaa;
+}
+
+/* ----- history container ----- */
+.gameHistory {
+   flex: 1;
+   display: grid;
+   grid-template-rows: auto 1fr;
+   min-height: 200px;
+   width: calc(var(--toolbar-default-width) - 2 * var(--main-padding));
+}
+
+.gameListContainer {
+   position: relative;
+   height: auto;
+}
+
+.gameList {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   overflow: auto;
+}
+
+.gameList .unavailable { text-align: center; padding-top: 20px; }
