@@ -1,28 +1,25 @@
 import { useState, useEffect } from 'react';
+import { useGameInfo } from '../../contexts/gameinfo';
 import InfoContainer from './infocontainer';
 import GameHistory from './gamehistory';
-import { useGameInfo } from '../../contexts/gameinfo';
-import API from '../../api';
-import client from '../../api/client';
+import api from '../../api';
 import style from './toolbar.module.css';
 
 const Toolbar = () => {
    const [ recentGames, setRecentGames ] = useState([]);
    const [ playerGames, setPlayerGames ] = useState([]);
-
-   const { handleInfoUpdate } = useGameInfo();
+   const { gameInfo } = useGameInfo();
 
    // listen for player id and update player game list
-   client.addListener('playerIdUpdate', data => {
-      handleInfoUpdate(data);
-      API.getPlayerGames(data.playerId).then(games => setPlayerGames(games.reverse()));
-   });
+   useEffect(() => {
+      if (!gameInfo.playerId) return;
+      api.getPlayerGames(gameInfo.playerId).then(games => setPlayerGames(games.reverse()));
+   }, [gameInfo.playerId]);
 
    // grab recent games on init
    useEffect(() => {
-      API.getRecentGames().then(games => setRecentGames(games.reverse()));
+      api.getRecentGames().then(games => setRecentGames(games.reverse()));
    }, []);
-
 
    return (
       <div className={style.toolbarArea}>

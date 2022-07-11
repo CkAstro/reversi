@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useGameInfo } from '../../contexts/gameinfo';
+import { useModal } from '../../contexts/modal';
 import client from '../../api/client';
 import GameBoard from '../gameboard';
 import BackButton from './backbutton';
 import MoveDisplay from './movedisplay';
 import OpponentDisplay from './opponentdisplay';
 import SkipMessage from '../modal/skipmessage';
-import { useModal } from '../../contexts/modal';
-import style from './activegame.module.css';
 import GameOverMessage from '../modal/gameovermessage';
+import style from './activegame.module.css';
 
 const ActiveGame = () => {
    const { setModalContent } = useModal();
-   const { gameInfo, handleInfoUpdate, resetGameInfo } = useGameInfo();
+   const { gameInfo, resetGameInfo } = useGameInfo();
 
-   // record most recent move so we can trigger 
+   // record most recent move so we can trigger effects
    const [ lastGameState, setLastGameState ] = useState(null);
    const [ lastMove, setLastMove ] = useState(null);
    useEffect(() => {
@@ -30,9 +30,6 @@ const ActiveGame = () => {
       }
       setLastGameState(gameState.slice());
    }, [gameInfo.gameState]);
-
-   // listen for game update (player makes a move, etc)
-   client.addListener('gameUpdate', handleInfoUpdate);
 
    useEffect(() => {
       if (gameInfo.legalMove || gameInfo.activePlayer !== gameInfo.playerColor || gameInfo.gameOver) return;

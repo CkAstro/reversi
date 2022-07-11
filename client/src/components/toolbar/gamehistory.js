@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import GameListItem from './gamelistitem';
 import style from './toolbar.module.css';
 
@@ -69,4 +69,4 @@ const GameHistory = ({ recentGames, playerGames }) => {
    );
 }
 
-export default GameHistory;
+export default memo(GameHistory);
