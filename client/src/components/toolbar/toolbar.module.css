@@ -5,16 +5,20 @@
    background: var(--ncsu-light-gray);
    border-radius: var(--main-spacing);
    padding: var(--main-padding);
+   display: flex;
+   flex-direction: column;
 }
 
 .toolbarFlexContainer {
    display: flex;
    flex-direction: column;
+   flex: 1;
 }
 
 @media only screen and (max-width: 1000px) {
    .toolbarFlexContainer {
       margin-top: var(--main-spacing);
+      gap: var(--main-spacing);
       flex-direction: row; 
       justify-content: space-around;
    }
@@ -22,7 +26,7 @@
 
 @media only screen and (max-width: 700px) {
    .toolbarFlexContainer {
-      /* margin-top: var(--main-spacing); */
+      gap: 0;
       flex-direction: column; 
       justify-content: space-around;
       align-items: center;
@@ -80,6 +84,7 @@
 .idRequest button:hover { background: #8a8a8a; }
 
 .gameHistory {
+   flex: 1;
    display: grid;
    grid-template-rows: auto 1fr;
    min-height: 200px;
