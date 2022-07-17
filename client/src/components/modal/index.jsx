@@ -1,7 +1,7 @@
-import { useModal } from '../../contexts/modal';
+import { useModal } from 'contexts';
+import GameOverMessage from './gameovermessage';
 import ServerMessage from './servermessage';
 import SkipMessage from './skipmessage';
-import GameOverMessage from './gameovermessage';
 import style from './modal.module.css';
 
 const Modal = () => {
@@ -20,5 +20,4 @@ const Modal = () => {
    );
 }
 
-export default Modal;
-export { ServerMessage, SkipMessage, GameOverMessage };
+export { Modal, ServerMessage, SkipMessage, GameOverMessage };

@@ -1,7 +1,6 @@
 import { memo } from 'react';
-import { useModal } from '../../contexts/modal';
-import { useGameInfo } from '../../contexts/gameinfo';
-import client from '../../api/client';
+import { useGameInfo, useModal } from 'contexts';
+import client from 'api/client';
 import style from './modal.module.css';
 
 const GameOverMessage = () => {
@@ -29,12 +28,14 @@ const GameOverMessage = () => {
    const onClickYes = playerColor === 'observer' ? false : true;
    const onClickNo = playerColor === 'observer' ? null : false;
 
-   return (<>
-      <h1>Game Over</h1>
-      <p>{winner}! {message}</p>
-      <div className={`noselect ${style.respondYesButton}`} onClick={() => handleResponse(onClickYes)}>Yes</div>
-      <div className={`noselect ${style.respondNoButton}`} onClick={() => handleResponse(onClickNo)}>No</div>
-   </>);
+   return (
+      <>
+         <h1>Game Over</h1>
+         <p>{winner}! {message}</p>
+         <div className={`noselect ${style.respondYesButton}`} onClick={() => handleResponse(onClickYes)}>Yes</div>
+         <div className={`noselect ${style.respondNoButton}`} onClick={() => handleResponse(onClickNo)}>No</div>
+      </>
+   );
 }
 
 export default memo(GameOverMessage);

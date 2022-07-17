@@ -1,5 +1,4 @@
-import GameBoard from '../gameboard';
-import GamePiece from '../gameboard/gamepiece';
+import { GameBoard, GamePiece } from 'components';
 import style from './gamelistitem.module.css';
 
 const GameListItem = ({ gameInfo, onClick, isActive }) => {

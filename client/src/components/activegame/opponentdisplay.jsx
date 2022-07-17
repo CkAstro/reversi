@@ -1,4 +1,4 @@
-import { useGameInfo } from '../../contexts/gameinfo';
+import { useGameInfo } from 'contexts';
 import style from './activegame.module.css';
 
 const OpponentDisplay = () => {

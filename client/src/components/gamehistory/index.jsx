@@ -1,8 +1,8 @@
 import { useState, useEffect, memo } from 'react';
-import { useGameInfo } from '../../contexts/gameinfo';
-import GameListItem from '../gamelistitem';
+import { useGameInfo } from 'contexts';
+import { GameListItem } from 'components';
 import buildGameList from './buildgamelist';
-import api from '../../api';
+import api from 'api';
 import style from './gamehistory.module.css';
 
 const GameHistory = () => {

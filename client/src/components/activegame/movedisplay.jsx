@@ -1,4 +1,4 @@
-import { useGameInfo } from '../../contexts/gameinfo';
+import { useGameInfo } from 'contexts';
 
 const MoveDisplay = () => {
    const { gameInfo } = useGameInfo();

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+      "baseUrl": "src",
+      "paths": {
+         "@/*": [ "src/*" ]
+      },
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "jsx": "react-jsx"
+   },
+   "include": [
+      "src"
+   ],
+   "exclude": [
+      "node_modules"
+   ],
+   "extends": "./jsconfig.paths.json"
+}

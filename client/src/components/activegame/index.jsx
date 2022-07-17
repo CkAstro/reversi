@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useGameInfo } from '../../contexts/gameinfo';
-import { useModal } from '../../contexts/modal';
-import { SkipMessage, GameOverMessage } from '../modal';
-import client from '../../api/client';
-import GameBoard from '../gameboard';
-import BackButton from './backbutton';
-import MoveDisplay from './movedisplay';
+import { useGameInfo, useModal } from 'contexts';
+import { SkipMessage, GameOverMessage, GameBoard } from 'components';
 import OpponentDisplay from './opponentdisplay';
+import MoveDisplay from './movedisplay';
+import BackButton from './backbutton';
+import client from 'api/client';
 import style from './activegame.module.css';
 
 const ActiveGame = () => {
@@ -47,14 +45,16 @@ const ActiveGame = () => {
    
    const myTurn = gameInfo.playerColor === gameInfo.activePlayer;
 
-   return (<>
-      <BackButton onClick={() => handleEndGameResponse(false)}/>
-      <div className={style.activeGame}>
-         <OpponentDisplay/>
-         <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} lastMove={lastMove}/>
-         <MoveDisplay/>
-      </div>
-   </>);
+   return (
+      <>
+         <BackButton onClick={() => handleEndGameResponse(false)}/>
+         <div className={style.activeGame}>
+            <OpponentDisplay/>
+            <GameBoard gameState={gameInfo.gameState} activeBoard={myTurn} lastMove={lastMove}/>
+            <MoveDisplay/>
+         </div>
+      </>
+   );
 }
 
 export default ActiveGame;

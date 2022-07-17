@@ -30,5 +30,5 @@ export default {
    baseUrl,
    getActiveGames,
    getRecentGames,
-   getPlayerGames
+   getPlayerGames,
 }

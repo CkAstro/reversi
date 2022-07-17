@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useActiveGameList } from '../../contexts/activegamelist';
-import client from '../../api/client';
+import { useActiveGameList } from 'contexts';
 import GameObject from './gameobject';
+import client from 'api/client';
 
 const LiveGames = () => { 
    const [ liveGames, setLiveGames ] = useState([]);

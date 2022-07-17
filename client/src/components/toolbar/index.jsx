@@ -1,5 +1,5 @@
 import InfoContainer from './infocontainer';
-import GameHistory from '../gamehistory';
+import { GameHistory } from 'components';
 import style from './toolbar.module.css';
 
 const Toolbar = () => {

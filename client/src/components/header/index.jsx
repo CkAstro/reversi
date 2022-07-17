@@ -1,18 +1,16 @@
 import NavBar from './navbar';
 import style from './header.module.css';
 
-const Header = () => {
-   return (
-      <div className={style.headerContainer}>
-         <div className={style.header}>
-            <div className='mainContainer'>
-               <h1>Christopher Kolb</h1>
-               <h2>Full Stack Development + Computational Astrophysics</h2>
-            </div>
+const Header = () => (
+   <div className={style.headerContainer}>
+      <div className={style.header}>
+         <div className='mainContainer'>
+            <h1>Christopher Kolb</h1>
+            <h2>Full Stack Development + Computational Astrophysics</h2>
          </div>
-         <NavBar/>
       </div>
-   );
-}
+      <NavBar/>
+   </div>
+);
 
 export default Header;

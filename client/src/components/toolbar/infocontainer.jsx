@@ -1,4 +1,4 @@
-import { useGameInfo } from '../../contexts/gameinfo';
+import { useGameInfo } from 'contexts';
 import GameInfoArea from './gameinfoarea';
 import UsernameArea from './usernamearea';
 import style from './toolbar.module.css';

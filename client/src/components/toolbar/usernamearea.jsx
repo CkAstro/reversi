@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import client from '../../api/client';
+import client from 'api/client';
 import style from './toolbar.module.css';
 
 const UsernameArea = ({ playerId }) => {

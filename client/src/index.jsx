@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { GameInfoProvider, useGameInfo } from './contexts/gameinfo';
-import { ModalProvider, useModal } from './contexts/modal';
-import { ActiveGameListProvider, useActiveGameList } from './contexts/activegamelist';
-import Header from './components/header';
-import Display from './components/display';
-import Toolbar from './components/toolbar';
-import client from './api/client';
-import api from './api';
-import Modal, { ServerMessage } from './components/modal';
+import { 
+   ActiveGameListProvider, 
+   GameInfoProvider, 
+   ModalProvider, 
+   useActiveGameList, 
+   useGameInfo, 
+   useModal, 
+} from 'contexts';
+import { Header, Display, Toolbar, Modal, ServerMessage } from 'components';
+import client from 'api/client';
+import api from 'api';
 import './index.css';
 
 const Reversi = () => {

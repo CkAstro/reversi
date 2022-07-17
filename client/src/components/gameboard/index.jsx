@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import GameSquare from './gamesquare';
-import client from '../../api/client';
+import client from 'api/client';
 import style from './gameboard.module.css';
 
 const GameBoard = ({ lastMove, gameState, activeBoard, mini }) => {
