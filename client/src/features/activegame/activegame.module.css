@@ -10,15 +10,5 @@
 
 .activeGame>p { text-align: center; }
 
-.backButton {
-   display: inline-block;
-   background: var(--ncsu-light-gray);
-   border-radius: 10px;
-   margin: 0px;
-   padding: 6px 12px;
-   width: auto;
-   cursor: pointer;
-}
-
 .playerNameText { font-size: 24px; font-weight: bold; }
 .playerVsText { padding: 0px 12px; }

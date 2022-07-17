@@ -3,3 +3,13 @@
    width: var(--display-width);
    box-sizing: border-box;
 }
+
+.backButton {
+   display: inline-block;
+   background: var(--ncsu-light-gray);
+   border-radius: 10px;
+   margin: 0px;
+   padding: 6px 12px;
+   width: auto;
+   cursor: pointer;
+}

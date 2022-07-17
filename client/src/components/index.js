@@ -1,4 +1,3 @@
-import ActiveGame from './activegame';
 import Display from './display';
 import GameBoard from './gameboard';
 import GamePiece from './gameboard/gamepiece';
@@ -10,7 +9,6 @@ import Toolbar from './toolbar';
 
 export * from './modal';
 export {
-   ActiveGame,
    Display,
    GameBoard,
    GamePiece,
