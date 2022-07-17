@@ -2,23 +2,21 @@ import { useGameInfo } from 'contexts';
 import { ActiveGame } from 'features';
 import { GameSelector } from 'components';
 import BackButton from './backbutton';
-import client from 'api/client';
+import HelpButton from './helpbutton';
 import style from './display.module.css';
 
 const Display = () => {
-   const { gameInfo, resetGameInfo } = useGameInfo();
+   const { gameInfo } = useGameInfo();
 
    const display = gameInfo.activeGame ? <ActiveGame/> : <GameSelector/>;
    const hasBackButton = gameInfo.activeGame;
 
-   const handlePressBack = () => {
-      resetGameInfo();
-      client.send('leaveGameRequest', {status: true});
-   }
-
    return (
       <div className={style.gameArea}>
-         {hasBackButton ? <BackButton onClick={handlePressBack}/> : null}
+         <div className={style.gameArea__buttonContainer}>
+            <HelpButton/>
+            {hasBackButton ? <BackButton/> : null}
+         </div>
          {display}
       </div>
    );

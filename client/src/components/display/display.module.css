@@ -4,12 +4,64 @@
    box-sizing: border-box;
 }
 
-.backButton {
-   display: inline-block;
+/* ----- buttons ----- */
+.gameArea__buttonContainer_backButton {
    background: var(--ncsu-light-gray);
-   border-radius: 10px;
+   border-radius: 20px;
    margin: 0px;
    padding: 6px 12px;
    width: auto;
    cursor: pointer;
+   transition: all 0.2s;
 }
+
+.gameArea__buttonContainer_backButton:hover { background: #999; }
+
+.gameArea__buttonContainer {
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-between;
+}
+
+.gameArea__buttonContainer_helpButton { 
+   background: var(--ncsu-light-gray);
+   border-radius: 20px;
+   margin: 0;
+   padding: 6px 12px;
+   cursor: pointer;
+   transition: all 0.2s;
+}
+
+.gameArea__buttonContainer_helpButton:hover { background: #999; }
+
+/* ----- modal ----- */
+.gameArea__helpModal {
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+}
+
+.gameArea__helpModal_section {
+   display: flex;
+   width: 100%;
+   gap: 6px;
+   font-size: 14px;
+}
+
+.gameArea__helpModal_section h2 { margin: 0; padding: 0; }
+
+.gameArea__helpModal_section > *:first-child { flex: 1; }
+
+/* ----- close button ----- */
+.helpModal__closeButton {
+   position: absolute;
+   bottom: 10px;
+   right: 10px;
+   background: var(--ncsu-light-gray);
+   padding: 6px 12px;
+   border-radius: 6px;
+   cursor: pointer;
+   transition: all 0.2s;
+}
+
+.helpModal__closeButton:hover { background: #999; }
