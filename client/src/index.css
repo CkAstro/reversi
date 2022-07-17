@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@font-face {
+   font-family: 'Roboto';
+   src: url('assets/fonts/Roboto-Regular.ttf');
+}
+@font-face {
+   font-family: 'Roboto';
+   src: url('assets/fonts/Roboto-Bold.ttf');
+   font-weight: 700;
+}
 
 body, html {
    margin: 0px;
@@ -40,13 +48,8 @@ body, html {
    user-select: none;
 }
 
-.noscrollbar {
-   scrollbar-width: none;
-   -ms-overflow-style: none;
-}
-.noscrollbar::-webkit-scrollbar {
-   display: none;
-}
+.noscrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.noscrollbar::-webkit-scrollbar { display: none; }
 
 /* ----- layout troubleshooting (uncomment to view all borders) ----- */
 /* * {
