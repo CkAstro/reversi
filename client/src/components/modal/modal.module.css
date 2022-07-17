@@ -24,9 +24,9 @@
    position: relative;
    border: 2px solid var(--ncsu-dark-gray);
    border-radius: 10px;
-   width: 500px;
-   background: rgba(240, 240, 240, 0.7);
-   padding: 20px;
+   width: 550px;
+   background: rgba(240, 240, 240, 0.9);
+   padding: 20px 10px;
    padding-bottom: 48px;
 }
 
